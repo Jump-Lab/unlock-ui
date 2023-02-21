@@ -29,6 +29,7 @@ const Collection_items = () => {
           {/* <img src="img/gradient_light.jpg" alt="gradient" className="h-full w-full" /> */}
           <Image
             src="/images/gradient_light.jpg"
+            loader={() => "/images/gradient_light.jpg"}
             alt="gradient"
             className="h-full w-full"
             layout="fill"

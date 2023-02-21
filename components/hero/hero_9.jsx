@@ -34,6 +34,7 @@ const Hero_9 = () => {
       <section className="relative h-screen">
         <Image
           src="/images/hero/hero_dao.jpg"
+          loader={() => "/images/hero/hero_dao.jpg"}
           alt="gradient"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
           layout="fill"

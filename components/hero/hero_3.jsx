@@ -53,6 +53,7 @@ const Hero_3 = () => {
 
                   <Image
                     src={image}
+                    loader={() => image}
                     className="absolute inset-0 h-full w-full object-cover"
                     alt={title}
                     layout="fill"

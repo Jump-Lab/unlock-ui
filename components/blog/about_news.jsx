@@ -15,6 +15,7 @@ const About_news = () => {
             layout="fill"
             alt="gradient"
             className="h-full w-full"
+            loader={() => "/images/gradient_light.jpg"}
           />
         </picture>
         <div className="container">

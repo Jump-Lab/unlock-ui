@@ -13,6 +13,7 @@ const Error_page = () => {
           <picture className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
             <Image
               src="/images/gradient_light.jpg"
+              loader={() => "/images/gradient_light.jpg"}
               alt="gradient"
               width={1920}
               height={789}
@@ -24,6 +25,7 @@ const Error_page = () => {
               <span className="mb-14 inline-block">
                 <Image
                   src="/images/404.png"
+                  loader={() => "/images/404.png"}
                   width={336}
                   height={165}
                   alt="gradient"

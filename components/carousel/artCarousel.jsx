@@ -57,6 +57,7 @@ const ArtsCarousel = () => {
                       <a>
                         <Image
                           src={bigImage}
+                          loader={() => bigImage}
                           alt="item 1"
                           height="430"
                           width="379"
@@ -73,6 +74,7 @@ const ArtsCarousel = () => {
                           {/* user image */}
                           <Image
                             src={userImage}
+                            loader={() => userImage}
                             alt={name}
                             height={40}
                             width={40}

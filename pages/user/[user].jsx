@@ -49,6 +49,7 @@ const User = () => {
               <div className="relative h-[18.75rem]">
                 <Image
                   src={coverPhoto}
+                  loader={() => coverPhoto}
                   alt="banner"
                   layout="fill"
                   objectFit="cover"
@@ -61,6 +62,7 @@ const User = () => {
                   <figure className="relative h-40 w-40 dark:border-jacarta-600 rounded-xl border-[5px] border-white">
                     <Image
                       src={image}
+                      loader={() => image}
                       alt={title}
                       layout="fill"
                       objectFit="contain"

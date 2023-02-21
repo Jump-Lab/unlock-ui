@@ -63,6 +63,7 @@ const BidsCarousel = () => {
                         <div className="w-full">
                           <Image
                             src={image}
+                            loader={() => image}
                             alt={title}
                             height={230}
                             width={230}

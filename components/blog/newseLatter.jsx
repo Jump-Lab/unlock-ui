@@ -12,6 +12,7 @@ const NewseLatter = ({ bgWhite = true }) => {
             alt="gradient"
             className="h-full"
             layout="fill"
+            loader={() => "/images/gradient_light.jpg"}
           />
         </picture>
       )}

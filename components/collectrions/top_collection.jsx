@@ -128,6 +128,7 @@ const Top_collection = () => {
                         {/* <img src={image} alt={title} className="rounded-2lg" /> */}
                         <Image
                           src={image}
+                          loader={() => image}
                           alt={title}
                           className="rounded-2lg"
                           height={48}

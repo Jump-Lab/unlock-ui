@@ -8,6 +8,7 @@ const NewseLatter2 = () => {
       <picture className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
         <Image
           src="/images/gradient.jpg"
+          loader={() => "/images/gradient.jpg"}
           alt="gradient"
           className="h-full w-full"
           layout="fill"
@@ -16,6 +17,7 @@ const NewseLatter2 = () => {
       <picture className="pointer-events-none absolute inset-0 -z-10 hidden dark:block">
         <Image
           src="/images/gradient_dark.jpg"
+          loader={() => "/images/gradient_dark.jpg"}
           alt="gradient dark"
           className="h-full w-full"
           layout="fill"

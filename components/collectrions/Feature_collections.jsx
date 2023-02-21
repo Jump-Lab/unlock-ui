@@ -11,6 +11,7 @@ const Feature_collections = ({ bgWhite = false }) => {
           <picture className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
             <Image
               src="/images/gradient_light.jpg"
+              loader={() => "/images/gradient_light.jpg"}
               alt="gradient"
               className="h-full"
               layout="fill"

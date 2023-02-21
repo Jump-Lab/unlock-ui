@@ -14,6 +14,7 @@ export default function Header03() {
                 <div className="max-h-7 dark:hidden">
                   <Image
                     src={Logo}
+                    loader={() => Logo}
                     height={28}
                     width={130}
                     alt="Xhibiter | NFT Marketplace"
@@ -22,6 +23,7 @@ export default function Header03() {
                 <div className="hidden max-h-7 dark:block">
                   <Image
                     src={WhiteLogo}
+                    loader={() => WhiteLogo}
                     height={28}
                     width={130}
                     alt="Xhibiter | NFT Marketplace"

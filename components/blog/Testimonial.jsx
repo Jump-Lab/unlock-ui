@@ -10,6 +10,7 @@ const Testimonial = ({ bgWhite }) => {
             alt="gradient"
             className="h-full"
             layout="fill"
+            loader={() => "/images/gradient_light.jpg"}
           />
         </picture>
       )}

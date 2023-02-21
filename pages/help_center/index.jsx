@@ -15,7 +15,12 @@ const Help_center = () => {
       <div className="pt-[5.5rem] lg:pt-24">
         {/* <!-- Page Title --> */}
 
-        <ImageTitle text="How can I help you?" image={bgImage} input={true} />
+        <ImageTitle
+          text="How can I help you?"
+          image={bgImage}
+          loader={() => bgImage}
+          input={true}
+        />
 
         {/* <!-- Help Center --> */}
         <section className="relative py-24">

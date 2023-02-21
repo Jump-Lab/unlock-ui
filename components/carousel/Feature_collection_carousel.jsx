@@ -69,6 +69,7 @@ const Feature_collections_carousel = () => {
                       <figure className="w-[74.5%] h-full">
                         <Image
                           src={bigImage}
+                          loader={() => bigImage}
                           alt="item 1"
                           className="rounded-[0.625rem]"
                           width={150}

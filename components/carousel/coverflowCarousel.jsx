@@ -67,6 +67,7 @@ const CoverflowCarousel = () => {
                         <a>
                           <Image
                             src={img}
+                            loader={({ src }) => src}
                             alt={title}
                             className="swiper-lazy h-[430px] w-full object-cover"
                             height="430"

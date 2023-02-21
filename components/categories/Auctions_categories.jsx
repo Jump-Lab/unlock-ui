@@ -65,6 +65,7 @@ const Auctions_categories = () => {
                             <a>
                               <Image
                                 src={creatorImage}
+                                loader={() => creatorImage}
                                 alt="creator"
                                 className="h-6 w-6 rounded-full"
                                 height={24}
@@ -84,6 +85,7 @@ const Auctions_categories = () => {
                             <a>
                               <Image
                                 src={ownerImage}
+                                loader={() => ownerImage}
                                 alt="creator"
                                 className="h-6 w-6 rounded-full"
                                 height={24}
@@ -102,6 +104,7 @@ const Auctions_categories = () => {
                         <a>
                           <Image
                             src={bigImage}
+                            loader={() => bigImage}
                             alt="item 8"
                             className="w-full rounded-[0.625rem]"
                             loading="lazy"

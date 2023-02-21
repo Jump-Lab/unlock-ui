@@ -37,7 +37,13 @@ const Features_carousel = () => {
               <div className="rounded-2.5xl bg-jacarta-800 p-10">
                 <div className="mb-4 md:mb-0">
                   <figure className="mb-8">
-                    <Image src={img} alt="" height={48} width={48} />
+                    <Image
+                      src={img}
+                      loader={() => img}
+                      alt=""
+                      height={48}
+                      width={48}
+                    />
                   </figure>
                   <h3 className="mb-4 font-display text-lg text-white">
                     {title}
