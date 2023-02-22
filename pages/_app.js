@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Meta title="Home 1" />
+      {/* <Meta title="Home 1" /> */}
 
       <Provider store={store}>
         <ThemeProvider enableSystem={true} attribute="class">

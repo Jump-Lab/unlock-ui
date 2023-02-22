@@ -62,7 +62,6 @@ const Auctions_categories = () => {
                           }
                         >
                           <Link href={/item/ + itemLink}>
-
                             <Image
                               src={creatorImage}
                               loader={() => creatorImage}
@@ -71,7 +70,6 @@ const Auctions_categories = () => {
                               height={24}
                               width={24}
                             />
-
                           </Link>
                         </Tippy>
                         <Tippy
@@ -82,7 +80,6 @@ const Auctions_categories = () => {
                           }
                         >
                           <Link href={/item/ + itemLink}>
-
                             <Image
                               src={ownerImage}
                               loader={() => ownerImage}
@@ -91,7 +88,6 @@ const Auctions_categories = () => {
                               height={24}
                               width={24}
                             />
-
                           </Link>
                         </Tippy>
                       </div>
@@ -101,29 +97,22 @@ const Auctions_categories = () => {
                     </div>
                     <figure className="relative">
                       <Link href={/item/ + itemLink}>
-
                         <Image
                           src={bigImage}
                           loader={() => bigImage}
                           alt="item 8"
                           className="w-full rounded-[0.625rem]"
                           loading="lazy"
-                          height="100%"
-                          width="100%"
-                          layout="responsive"
-                          objectFit="cover"
+                          fill="true"
                         />
-
                       </Link>
                       <Countdown_timer time={+auction_timer} />
                     </figure>
                     <div className="mt-7 flex items-center justify-between">
                       <Link href={/item/ + itemLink}>
-
                         <span className="font-display text-jacarta-700 hover:text-accent text-base dark:text-white">
                           {title}
                         </span>
-
                       </Link>
                       <span className="dark:border-jacarta-600 border-jacarta-100 flex items-center whitespace-nowrap rounded-md border py-1 px-2">
                         <span>
