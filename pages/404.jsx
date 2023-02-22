@@ -38,10 +38,12 @@ const Error_page = () => {
                 Oops! The page you are looking for does not exist. It might have
                 been moved or deleted.
               </p>
-              <Link href="/">
-                <a className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
+              <Link
+                href="/"
+                className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
+                
                   Navigate Back Home
-                </a>
+                
               </Link>
             </div>
           </div>

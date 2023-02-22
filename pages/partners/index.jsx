@@ -191,10 +191,12 @@ const Partners = () => {
                 feature releases, NFT drops, and tips and tricks for navigating
                 Xhibiter
               </p>
-              <Link href="/contact">
-                <a className="text-accent hover:bg-accent-dark inline-block rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
+              <Link
+                href="/contact"
+                className="text-accent hover:bg-accent-dark inline-block rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
+                
                   Sign Up Now
-                </a>
+                
               </Link>
             </div>
           </div>

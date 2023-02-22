@@ -4,7 +4,7 @@ import React from 'react';
 
 const Statistic = () => {
 	return (
-		<div>
+        <div>
 			{/* <!-- Statistic / Promo --> */}
 			<section className="relative py-12 lg:py-36">
 				<picture className="pointer-events-none absolute inset-0 -z-10 after:absolute after:bottom-0 after:h-1/3 after:w-full after:bg-gradient-to-t after:from-[#010107]">
@@ -94,10 +94,12 @@ const Statistic = () => {
 								blockchain technology. Even if the digital creation is copied, it won't be the
 								authentic and originally signed version.
 							</p>
-							<Link href="/collection/explore_collection">
-								<a className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+							<Link
+                                href="/collection/explore_collection"
+                                className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+								
 									Come Discover
-								</a>
+								
 							</Link>
 						</div>
 					</div>
@@ -105,7 +107,7 @@ const Statistic = () => {
 			</section>
 			{/* <!-- end statistic / promo --> */}
 		</div>
-	);
+    );
 };
 
 export default Statistic;

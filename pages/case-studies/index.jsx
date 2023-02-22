@@ -6,7 +6,7 @@ import Meta from '../../components/Meta';
 
 const Case_studies = () => {
 	return (
-		<div>
+        <div>
 			<Meta title="Case_studies || Xhibiter | NFT Marketplace Next.js Template" />
 			{/* <!-- Page Title --> */}
 			<section className="relative py-32 mt-[95px]">
@@ -37,24 +37,28 @@ const Case_studies = () => {
 						{case_studies_data.map((item) => {
 							const { id, href, img, title } = item;
 							return (
-								<article key={id}>
-									<Link href={'/case-studies/' + href}>
-										<a className="dec no-underline">
-											<figure className="mb-10 overflow-hidden rounded-2.5xl transition-shadow hover:shadow-xl">
-												<img src={img} alt={title} />
-											</figure>
-										</a>
-									</Link>
+                                <article key={id}>
+									<Link href={'/case-studies/' + href} className="dec no-underline">
+
+                                        <figure className="mb-10 overflow-hidden rounded-2.5xl transition-shadow hover:shadow-xl">
+                                            <img src={img} alt={title} />
+                                        </figure>
+
+                                    </Link>
 									<h2 className="group mb-2 max-w-md font-display text-lg text-jacarta-700 dark:text-white">
-										<Link href={'/case-studies/' + href}>
-											<a className="no-underline group-hover:text-accent ">{title}</a>
+										<Link
+                                            href={'/case-studies/' + href}
+                                            className="no-underline group-hover:text-accent ">
+											{title}
 										</Link>
 									</h2>
-									<Link href={'/case-studies/' + href}>
-										<a className="no-underline text-sm font-bold text-accent">View Case Study</a>
+									<Link
+                                        href={'/case-studies/' + href}
+                                        className="no-underline text-sm font-bold text-accent">
+										View Case Study
 									</Link>
 								</article>
-							);
+                            );
 						})}
 					</div>
 					<div className="mt-10 text-center">
@@ -62,7 +66,7 @@ const Case_studies = () => {
 							href="/collection/avatar_1"
 							className="no-underline inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark"
 						>
-							<a>Load More</a>
+							Load More
 						</Link>
 					</div>
 				</div>
@@ -70,7 +74,7 @@ const Case_studies = () => {
 			{/* <!-- end case studies --> */}
 			<Partners />
 		</div>
-	);
+    );
 };
 
 export default Case_studies;

@@ -5,7 +5,7 @@ import Statistic_promo_carousel from '../carousel/statistic_promo_2_carousel';
 
 const Statistic_promo_2 = () => {
 	return (
-		<div>
+        <div>
 			{/* <!-- Promo 2 --> */}
 			<section className="statistic_promo_2-section bg-[#010107] py-12 lg:pb-32 overflow-x-hidden">
 				<div className="container">
@@ -23,10 +23,12 @@ const Statistic_promo_2 = () => {
 								blockchain technology. Even if the digital creation is copied, it won't be the
 								authentic and originally signed version.
 							</p>
-							<Link href="/collection/explore_collection">
-								<a className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+							<Link
+                                href="/collection/explore_collection"
+                                className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+								
 									Create Avatar
-								</a>
+								
 							</Link>
 						</div>
 						<div className="relative text-center lg:w-1/2">
@@ -52,7 +54,7 @@ const Statistic_promo_2 = () => {
 			</section>
 			{/* <!-- end promo 2 --> */}
 		</div>
-	);
+    );
 };
 
 export default Statistic_promo_2;

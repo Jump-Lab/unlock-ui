@@ -3,7 +3,7 @@ import React from 'react';
 
 const Cta = () => {
 	return (
-		<div>
+        <div>
 			{/* <!-- CTA --> */}
 			<div className="relative -mt-48 z-10 dark:bg-jacarta-900">
 				<div className="container">
@@ -22,10 +22,12 @@ const Cta = () => {
 								<p className="mb-8 text-lg dark:text-jacarta-300">
 									Our support heroes will have you up and running in less than 10mins.
 								</p>
-								<Link href="/contact">
-									<a className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+								<Link
+                                    href="/contact"
+                                    className="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+									
 										Schedule a Call
-									</a>
+									
 								</Link>
 							</div>
 							<img src="/images/crypto-consultant/cta_illustration.png" alt="" />
@@ -35,7 +37,7 @@ const Cta = () => {
 			</div>
 			{/* <!-- end cta --> */}
 		</div>
-	);
+    );
 };
 
 export default Cta;

@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const Browse_category_carousel = () => {
 	return (
-		<div className="overflow-hidden">
+        <div className="overflow-hidden">
 			<Swiper
 				slidesPerView="auto"
 				spaceBetween={10}
@@ -39,30 +39,32 @@ const Browse_category_carousel = () => {
 				{Browse_category_data.map((item) => {
 					const { id, image, title, bgColor } = item;
 					return (
-						<SwiperSlide key={id}>
+                        <SwiperSlide key={id}>
 							<article>
-								<Link href="/collection/explore_collection">
-									<a className="dark:bg-jacarta-700 dark:border-jacarta-700 border-jacarta-100 rounded-2xl block border bg-white p-[1.1875rem] transition-shadow hover:shadow-lg">
-										<figure
-											style={{ backgroundColor: bgColor }}
-											className={` rounded-t-[0.625rem] w-full rounded-[0.625rem`}
-										>
-											<img src={image} alt="item 1" className="w-full" />
-										</figure>
-										<div className="mt-4 text-center">
-											<span className="font-display text-jacarta-700 text-lg dark:text-white">
-												{title}
-											</span>
-										</div>
-									</a>
-								</Link>
+								<Link
+                                    href="/collection/explore_collection"
+                                    className="dark:bg-jacarta-700 dark:border-jacarta-700 border-jacarta-100 rounded-2xl block border bg-white p-[1.1875rem] transition-shadow hover:shadow-lg">
+
+                                    <figure
+                                        style={{ backgroundColor: bgColor }}
+                                        className={` rounded-t-[0.625rem] w-full rounded-[0.625rem`}
+                                    >
+                                        <img src={image} alt="item 1" className="w-full" />
+                                    </figure>
+                                    <div className="mt-4 text-center">
+                                        <span className="font-display text-jacarta-700 text-lg dark:text-white">
+                                            {title}
+                                        </span>
+                                    </div>
+
+                                </Link>
 							</article>
 						</SwiperSlide>
-					);
+                    );
 				})}
 			</Swiper>
 		</div>
-	);
+    );
 };
 
 export default Browse_category_carousel;

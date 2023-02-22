@@ -29,15 +29,19 @@ const hero = () => {
               non-fungible tokens
             </p>
             <div className="flex space-x-4">
-              <Link href="/create">
-                <a className="bg-accent shadow-accent-volume hover:bg-accent-dark w-36 rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
+              <Link
+                href="/create"
+                className="bg-accent shadow-accent-volume hover:bg-accent-dark w-36 rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
+                
                   Upload
-                </a>
+                
               </Link>
-              <Link href="/collection/explore_collection">
-                <a className="text-accent shadow-white-volume hover:bg-accent-dark hover:shadow-accent-volume w-36 rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
+              <Link
+                href="/collection/explore_collection"
+                className="text-accent shadow-white-volume hover:bg-accent-dark hover:shadow-accent-volume w-36 rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
+                
                   Explore
-                </a>
+                
               </Link>
             </div>
           </div>

@@ -47,46 +47,46 @@ const Collection_category = ({ bgWhite = false }) => {
                           className="border-jacarta-100 dark:bg-jacarta-700 rounded-2xl flex border bg-white py-4 px-7 transition-shadow hover:shadow-lg dark:border-transparent"
                         >
                           <figure className="mr-4 shrink-0">
-                            <Link href={"/collection/" + itemLink}>
-                              <a className="relative block">
-                                <img
-                                  src={image}
-                                  alt={title}
-                                  className="rounded-2lg h-12 w-12"
-                                />
-                                <div className="dark:border-jacarta-600 bg-jacarta-700 absolute -left-3 top-1/2 flex h-6 w-6 -translate-y-2/4 items-center justify-center rounded-full border-2 border-white text-xs text-white">
-                                  {id}
-                                </div>
-                                {icon && (
-                                  <div
-                                    className="dark:border-jacarta-600 bg-green absolute -left-3 top-[60%] flex h-6 w-6 items-center justify-center rounded-full border-2 border-white"
-                                    data-tippy-content="Verified Collection"
+                            <Link href={"/collection/" + itemLink} className="relative block">
+
+                              <img
+                                src={image}
+                                alt={title}
+                                className="rounded-2lg h-12 w-12"
+                              />
+                              <div className="dark:border-jacarta-600 bg-jacarta-700 absolute -left-3 top-1/2 flex h-6 w-6 -translate-y-2/4 items-center justify-center rounded-full border-2 border-white text-xs text-white">
+                                {id}
+                              </div>
+                              {icon && (
+                                <div
+                                  className="dark:border-jacarta-600 bg-green absolute -left-3 top-[60%] flex h-6 w-6 items-center justify-center rounded-full border-2 border-white"
+                                  data-tippy-content="Verified Collection"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                    className="h-[.875rem] w-[.875rem] fill-white"
                                   >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 24 24"
-                                      width="24"
-                                      height="24"
-                                      className="h-[.875rem] w-[.875rem] fill-white"
-                                    >
-                                      <path
-                                        fill="none"
-                                        d="M0 0h24v24H0z"
-                                      ></path>
-                                      <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-                                    </svg>
-                                  </div>
-                                )}
-                              </a>
+                                    <path
+                                      fill="none"
+                                      d="M0 0h24v24H0z"
+                                    ></path>
+                                    <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                  </svg>
+                                </div>
+                              )}
+
                             </Link>
                           </figure>
                           <div>
-                            <Link href={"/collection/" + itemLink}>
-                              <a className="block">
-                                <span className="font-display text-jacarta-700 hover:text-accent font-semibold dark:text-white">
-                                  {title}
-                                </span>
-                              </a>
+                            <Link href={"/collection/" + itemLink} className="block">
+
+                              <span className="font-display text-jacarta-700 hover:text-accent font-semibold dark:text-white">
+                                {title}
+                              </span>
+
                             </Link>
                             <span className="dark:text-jacarta-300 text-sm">
                               {amount} ETH
@@ -96,10 +96,12 @@ const Collection_category = ({ bgWhite = false }) => {
                       );
                     })}
                   </div>
-                  <Link href="/collection/avatar_1">
-                    <a className="text-accent mt-8 block text-center text-sm font-bold tracking-tight">
+                  <Link
+                    href="/collection/avatar_1"
+                    className="text-accent mt-8 block text-center text-sm font-bold tracking-tight">
+                    
                       View All Drops
-                    </a>
+                    
                   </Link>
                 </div>
               );

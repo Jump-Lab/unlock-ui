@@ -29,15 +29,19 @@ const hero_12 = () => {
               World’s First Decentralized Marketplace With Blockchain
             </h1>
             <div className="flex space-x-4">
-              <Link href="/collection/explore_collection">
-                <a className="rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+              <Link
+                href="/collection/explore_collection"
+                className="rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+                
                   Get Started
-                </a>
+                
               </Link>
-              <Link href="/tarms">
-                <a className="rounded-full bg-white py-3 px-8 text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">
+              <Link
+                href="/tarms"
+                className="rounded-full bg-white py-3 px-8 text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">
+                
                   White Paper
-                </a>
+                
               </Link>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { case_studies_data } from '../../data/case-studies_data';
 
 const Related_studies = () => {
 	return (
-		<div>
+        <div>
 			{/* <!-- Case Studies --> */}
 			<section className="relative py-24">
 				<div className="container">
@@ -18,31 +18,31 @@ const Related_studies = () => {
 						{case_studies_data.slice(2).map((item) => {
 							const { id, href, img, title } = item;
 							return (
-								<article key={id}>
-									<Link href={'/case-studies/' + href}>
-										<a className="dec no-underline">
-											<figure className="mb-10 overflow-hidden rounded-2.5xl transition-shadow hover:shadow-xl">
-												<img src={img} alt={title} />
-											</figure>
-										</a>
-									</Link>
+                                <article key={id}>
+									<Link href={'/case-studies/' + href} className="dec no-underline">
+
+                                        <figure className="mb-10 overflow-hidden rounded-2.5xl transition-shadow hover:shadow-xl">
+                                            <img src={img} alt={title} />
+                                        </figure>
+
+                                    </Link>
 									<h2 className="group mb-2 max-w-md font-display text-lg text-jacarta-700 dark:text-white">
-										<Link href={href}>
-											<a className="no-underline text-white group-hover:text-accent ">{title}</a>
+										<Link href={href} className="no-underline text-white group-hover:text-accent ">
+											{title}
 										</Link>
 									</h2>
-									<Link href={href}>
-										<a className="no-underline text-sm font-bold text-accent">View Case Study</a>
+									<Link href={href} className="no-underline text-sm font-bold text-accent">
+										View Case Study
 									</Link>
 								</article>
-							);
+                            );
 						})}
 					</div>
 				</div>
 			</section>
 			{/* <!-- end case studies --> */}
 		</div>
-	);
+    );
 };
 
 export default Related_studies;
