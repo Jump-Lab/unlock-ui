@@ -39,16 +39,12 @@ const Hero_2 = () => {
             <Link
               href="/create"
               className="bg-accent shadow-accent-volume hover:bg-accent-dark w-36 rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
-              
                 Create
-              
             </Link>
             <Link
               href="/collection/explore_collection"
               className="text-accent shadow-white-volume hover:bg-accent-dark hover:shadow-accent-volume w-36 rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
-              
                 Explore
-              
             </Link>
           </div>
         </div>
