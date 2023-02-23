@@ -123,8 +123,10 @@ const Top_collection = () => {
                   key={id}
                 >
                   <figure className="mr-4 shrink-0">
-                    <Link href={"/collection/" + itemLink} className="relative block">
-
+                    <Link
+                      href={"/collection/" + itemLink}
+                      className="relative block"
+                    >
                       {/* <img src={image} alt={title} className="rounded-2lg" /> */}
                       <Image
                         src={image}
@@ -155,16 +157,13 @@ const Top_collection = () => {
                           </svg>
                         </div>
                       )}
-
                     </Link>
                   </figure>
                   <div>
                     <Link href={"/collection/" + itemLink} className="block">
-
                       <span className="font-display text-jacarta-700 hover:text-accent font-semibold dark:text-white">
                         {title}
                       </span>
-
                     </Link>
                     <span className="dark:text-jacarta-300 text-sm">
                       {amount} ETH
@@ -177,10 +176,9 @@ const Top_collection = () => {
           <div className="mt-10 text-center">
             <Link
               href="/rankings"
-              className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
-              
-                Go to Rankings
-              
+              className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block rounded-full py-3 px-8 text-center font-semibold text-white transition-all"
+            >
+              Go to Rankings
             </Link>
           </div>
         </div>

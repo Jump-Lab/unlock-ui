@@ -47,8 +47,10 @@ const Collection_category = ({ bgWhite = false }) => {
                           className="border-jacarta-100 dark:bg-jacarta-700 rounded-2xl flex border bg-white py-4 px-7 transition-shadow hover:shadow-lg dark:border-transparent"
                         >
                           <figure className="mr-4 shrink-0">
-                            <Link href={"/collection/" + itemLink} className="relative block">
-
+                            <Link
+                              href={"/collection/" + itemLink}
+                              className="relative block"
+                            >
                               <img
                                 src={image}
                                 alt={title}
@@ -69,24 +71,21 @@ const Collection_category = ({ bgWhite = false }) => {
                                     height="24"
                                     className="h-[.875rem] w-[.875rem] fill-white"
                                   >
-                                    <path
-                                      fill="none"
-                                      d="M0 0h24v24H0z"
-                                    ></path>
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
                                     <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
                                   </svg>
                                 </div>
                               )}
-
                             </Link>
                           </figure>
                           <div>
-                            <Link href={"/collection/" + itemLink} className="block">
-
+                            <Link
+                              href={"/collection/" + itemLink}
+                              className="block"
+                            >
                               <span className="font-display text-jacarta-700 hover:text-accent font-semibold dark:text-white">
                                 {title}
                               </span>
-
                             </Link>
                             <span className="dark:text-jacarta-300 text-sm">
                               {amount} ETH
@@ -98,10 +97,9 @@ const Collection_category = ({ bgWhite = false }) => {
                   </div>
                   <Link
                     href="/collection/avatar_1"
-                    className="text-accent mt-8 block text-center text-sm font-bold tracking-tight">
-                    
-                      View All Drops
-                    
+                    className="text-accent mt-8 block text-center text-sm font-bold tracking-tight"
+                  >
+                    View All Drops
                   </Link>
                 </div>
               );

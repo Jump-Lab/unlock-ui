@@ -109,7 +109,7 @@ const Metamask_comp_login = () => {
       <button className="js-wallet bg-accent hover:bg-accent-dark mb-4 flex w-full items-center justify-center rounded-full border-2 border-transparent py-4 px-8 text-center font-semibold text-white transition-all">
         <Image
           src="/images/wallets/metamask_24.svg"
-		  loader={() => "/images/wallets/metamask_24.svg"}
+          loader={() => "/images/wallets/metamask_24.svg"}
           className="mr-2.5 inline-block h-6 w-6"
           alt=""
           height={24}
@@ -124,7 +124,7 @@ const Metamask_comp_login = () => {
       <button className="js-wallet bg-accent hover:bg-accent-dark mb-4 flex w-full items-center justify-center rounded-full border-2 border-transparent py-4 px-8 text-center font-semibold text-white transition-all">
         <Image
           src="/images/wallets/metamask_24.svg"
-		  loader={() => "/images/wallets/metamask_24.svg"}
+          loader={() => "/images/wallets/metamask_24.svg"}
           className=" inline-block h-6 w-6"
           alt=""
           height={24}

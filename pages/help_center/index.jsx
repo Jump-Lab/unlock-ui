@@ -41,17 +41,16 @@ const Help_center = () => {
               {help_center_data.map((item) => {
                 const { id, title, text } = item;
                 return (
-                  (<Link
+                  <Link
                     href="#"
                     key={id}
-                    className="dark:border-jacarta-600 dark:bg-jacarta-700 rounded-2lg border-jacarta-100 border bg-white p-6 text-center transition-shadow hover:shadow-lg">
-
+                    className="dark:border-jacarta-600 dark:bg-jacarta-700 rounded-2lg border-jacarta-100 border bg-white p-6 text-center transition-shadow hover:shadow-lg"
+                  >
                     <h3 className="font-display text-jacarta-700 mb-2 text-base font-semibold dark:text-white">
                       {title}
                     </h3>
                     <p className="dark:text-jacarta-300">{text}</p>
-
-                  </Link>)
+                  </Link>
                 );
               })}
             </div>

@@ -1,0 +1,5 @@
+# ignore folder build
+# ignore folder dist
+.next
+out
+yarn.lock
