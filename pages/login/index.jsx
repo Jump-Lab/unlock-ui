@@ -40,13 +40,11 @@ const Login = () => {
             />
             {/* <!-- Logo --> */}
             <Link href="/" className="relative inline-block py-36">
-
               <img
                 src="/images/logo_white.png"
                 className="inline-block max-h-7"
                 alt="Xhibiter | NFT Marketplace"
               />
-
             </Link>
           </div>
 

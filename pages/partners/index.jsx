@@ -193,10 +193,9 @@ const Partners = () => {
               </p>
               <Link
                 href="/contact"
-                className="text-accent hover:bg-accent-dark inline-block rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white">
-                
-                  Sign Up Now
-                
+                className="text-accent hover:bg-accent-dark inline-block rounded-full bg-white py-3 px-8 text-center font-semibold transition-all hover:text-white"
+              >
+                Sign Up Now
               </Link>
             </div>
           </div>
