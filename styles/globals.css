@@ -6093,3 +6093,9 @@ body {
     width: auto;
   }
 }
+
+/* target [data-reach-dialog-overlay] */
+
+[data-reach-dialog-overlay] {
+  z-index: 9999;
+}

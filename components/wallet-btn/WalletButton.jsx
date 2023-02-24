@@ -1,10 +1,16 @@
 import { useDispatch } from "react-redux";
 import { walletModalShow } from "../../redux/counterSlice";
 import { useMetaMask } from "metamask-react";
+import { useWalletKit } from "@gokiprotocol/walletkit";
+import { useConnectedWallet, useSolana } from "@saberhq/use-solana";
 
 export default function WalletButton() {
   const dispath = useDispatch();
-  const { status, connect, account, chainId, ethereum } = useMetaMask();
+  const { status, account, chainId, ethereum } = useMetaMask();
+  const { connect } = useWalletKit();
+  const wallet = useConnectedWallet();
+  const { disconnect } = useSolana();
+  console.log("connect to wallet", wallet?.publicKey?.toBase58());
 
   const walletHandler = () => {
     if (status === "unavailable") {
@@ -32,6 +38,14 @@ export default function WalletButton() {
         </svg>
       </button>
     );
+
+  if (wallet?.publicKey?.toBase58()) {
+    return (
+      <button className="w-40 h-20 bg-red/40" onClick={disconnect}>
+        Disconnect
+      </button>
+    );
+  }
 
   if (status === "notConnected")
     return (

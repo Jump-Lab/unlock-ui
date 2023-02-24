@@ -8,6 +8,7 @@ import { MetaMaskProvider } from "metamask-react";
 import Meta from "../components/Meta";
 import UserContext from "../components/UserContext";
 import { useRef } from "react";
+import { WalletProviders } from "./provider";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <>
+    <WalletProviders>
       {/* <Meta title="Home 1" /> */}
 
       <Provider store={store}>
@@ -35,7 +36,7 @@ function MyApp({ Component, pageProps }) {
           </MetaMaskProvider>
         </ThemeProvider>
       </Provider>
-    </>
+    </WalletProviders>
   );
 }
 
