@@ -1,26 +1,41 @@
 import React, { useState } from "react";
-import "tippy.js/dist/tippy.css"; // optional
 import { FileUploader } from "react-drag-drop-files";
-import Meta from "../../components/Meta";
+import { useConnectedWallet } from "@saberhq/use-solana";
+
+import Meta from "components/Meta";
+import { defaultLitArgs } from "utils/lit/utils";
+import { encrypt } from "utils/lit/encrypt";
+import { useMetaplex } from "providers";
+
+const FILE_TYPES = [
+  "JPG",
+  "JPEG",
+  "PNG",
+  "GIF",
+  "SVG",
+  "MP4",
+  "WEBM",
+  "MP3",
+  "WAV",
+  "OGG",
+  "GLB",
+  "GLTF",
+];
+const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 
 const Create = () => {
-  const fileTypes = [
-    "JPG",
-    "PNG",
-    "GIF",
-    "SVG",
-    "MP4",
-    "WEBM",
-    "MP3",
-    "WAV",
-    "OGG",
-    "GLB",
-    "GLTF",
-  ];
-  const [file, setFile] = useState("");
+  const [content, setContent] = useState("");
+  const [file, setFile] = useState();
+  const { metaplex } = useMetaplex();
+  const wallet = useConnectedWallet();
 
-  const handleChange = (file) => {
+  const onChangeFile = (file) => {
     setFile(file.name);
+  };
+
+  const onSubmit = async () => {
+    const litArgs = defaultLitArgs(TEST_MINT);
+    const encrypted = await encrypt([file], litArgs);
   };
 
   return (
@@ -59,6 +74,7 @@ const Create = () => {
                 rows={4}
                 required
                 placeholder="Provide a detailed description of your item."
+                onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
 
@@ -98,9 +114,11 @@ const Create = () => {
                 </div>
                 <div className="dark:bg-jacarta-600 bg-jacarta-50 absolute inset-4 cursor-pointer rounded opacity-0 group-hover:opacity-100 ">
                   <FileUploader
-                    handleChange={handleChange}
+                    handleChange={onChangeFile}
+                    onDrop={onChangeFile}
+                    multiple={false}
                     name="file"
-                    types={fileTypes}
+                    types={FILE_TYPES}
                     classes="file-drag"
                     maxSize={100}
                     minSize={0}
@@ -111,7 +129,7 @@ const Create = () => {
 
             {/* <!-- Submit --> */}
             <button
-              disabled
+              onClick={onSubmit}
               className="bg-accent-lighter cursor-default rounded-full py-3 px-8 text-center font-semibold text-white transition-all"
             >
               Create

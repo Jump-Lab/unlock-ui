@@ -1,19 +1,19 @@
 import { LitArgs } from "./metadata";
 
-export const NETWORK = "solana"
+export const NETWORK = "solanaDevnet";
 
 export interface SolRpcConditions {
-    method: string
-    params: string[]
-    pdaParams: any
-    pdaInterface: any
-    pdaKey: any
-    chain: string
-    returnValueTest: {
-        key: string
-        comparator: string
-        value: string
-    }
+  method: string;
+  params: string[];
+  pdaParams: any;
+  pdaInterface: any;
+  pdaKey: any;
+  chain: string;
+  returnValueTest: {
+    key: string;
+    comparator: string;
+    value: string;
+  };
 }
 
 /**
@@ -23,21 +23,21 @@ export interface SolRpcConditions {
  * @returns {SolRpcConditions[]}
  */
 export function solRpcConditions(litArgs: LitArgs): SolRpcConditions[] {
-    return [
-        {
-            method: litArgs.method,
-            params: [litArgs.mint],
-            pdaParams: [],
-            pdaInterface: { offset: 0, fields: {} },
-            pdaKey: "",
-            chain: NETWORK,
-            returnValueTest: {
-                key: litArgs.returnValueTest.key, // "$.amount"
-                comparator: litArgs.returnValueTest.comparator, // ">"
-                value: litArgs.returnValueTest.value, // "0"
-            },
-        },
-    ]
+  return [
+    {
+      method: litArgs.method,
+      params: [litArgs.mint],
+      pdaParams: [],
+      pdaInterface: { offset: 0, fields: {} },
+      pdaKey: "",
+      chain: NETWORK,
+      returnValueTest: {
+        key: litArgs.returnValueTest.key, // "$.amount"
+        comparator: litArgs.returnValueTest.comparator, // ">"
+        value: litArgs.returnValueTest.value, // "0"
+      },
+    },
+  ];
 }
 
 /**
@@ -47,13 +47,13 @@ export function solRpcConditions(litArgs: LitArgs): SolRpcConditions[] {
  * @returns {LitArgs}
  */
 export function defaultLitArgs(mint: string): LitArgs {
-    return {
-        method: "balanceOfToken",
-        mint: mint,
-        returnValueTest: {
-            key: "$.amount",
-            comparator: ">",
-            value: "0"
-        }
-    }
+  return {
+    method: "balanceOfToken",
+    mint: mint,
+    returnValueTest: {
+      key: "$.amount",
+      comparator: ">",
+      value: "0",
+    },
+  };
 }
