@@ -5,12 +5,16 @@ import Image from "next/image";
 import UserId from "../../components/userId";
 import Head from "next/head";
 import Meta from "../../components/Meta";
+import { useDispatch } from "react-redux";
+import { showChangeAvatarModal } from "redux/counterSlice";
 
 const Edit_user = () => {
   const [profilePhoto, setProfilePhoto] = useState();
   const [coverePhoto, setCoverePhoto] = useState();
   const [preview, setPreview] = useState();
   const [coverPreview, setCoverPreview] = useState();
+
+  const dispatch = useDispatch();
 
   const handleProfilePhoto = (e) => {
     const file = e.target.files[0];
@@ -227,13 +231,16 @@ const Edit_user = () => {
                       height={140}
                       width={140}
                     />
-                    <div className="group hover:bg-accent border-jacarta-100 absolute -right-3 -bottom-2 h-8 w-8 overflow-hidden rounded-full border bg-white text-center hover:border-transparent">
-                      <input
+                    <div
+                      onClick={() => dispatch(showChangeAvatarModal())}
+                      className="group hover:bg-accent border-jacarta-100 absolute -right-3 -bottom-2 h-8 w-8 overflow-hidden rounded-full border bg-white text-center hover:border-transparent"
+                    >
+                      {/* <input
                         type="file"
                         accept="image/*"
                         className="absolute top-0 left-0 w-full cursor-pointer opacity-0"
                         onChange={(e) => handleProfilePhoto(e)}
-                      />
+                      /> */}
                       <div className="flex h-full items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

@@ -7,6 +7,7 @@ import Header01 from "./header/Header01";
 import Header02 from "./header/Header02";
 import Header03 from "./header/Header03";
 import Header04 from "./header/Header04";
+import ChangeAvatarModal from "./modal/ChangeAvatarModal";
 
 export default function Layout({ children }) {
   const route = useRouter();
@@ -34,6 +35,7 @@ export default function Layout({ children }) {
       <Wallet_modal />
       <BidsModal />
       <BuyModal />
+      <ChangeAvatarModal />
       <main>{children}</main>
       <Footer />
     </>
