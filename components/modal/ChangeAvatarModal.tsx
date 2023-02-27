@@ -1,35 +1,38 @@
 import { useConnectedWallet } from "@saberhq/use-solana";
 import { useSelector, useDispatch } from "react-redux";
-import { Metaplex } from "@metaplex-foundation/js";
-import { PublicKey, Connection } from "@solana/web3.js";
-import axios, { AxiosPromise, AxiosResponse } from "axios";
+import { PublicKey } from "@solana/web3.js";
+import axios, { AxiosPromise } from "axios";
 
 import { hideChangeAvatarModal } from "redux/counterSlice";
 import { useEffect, useState } from "react";
 import { INFT } from "types/nft";
 import Image from "next/image";
+import { getMetaplex } from "utils/getMetaplex";
+import { Nft, NftWithToken, Sft } from "@metaplex-foundation/js";
 
 const ChangeAvatarModal = () => {
   const dispatch = useDispatch();
   const { changeAvatarModal } = useSelector((state: any) => state.counter);
-  const [listNfts, setListNfts] = useState<INFT[]>([]);
+  const [listNfts, setListNfts] = useState<(Nft | Sft | NftWithToken)[]>([]);
+  const [selectedNft, setSelectedNft] = useState<Nft | Sft | NftWithToken>(
+    null
+  );
 
   const wallet = useConnectedWallet();
   const userWalletAddress = wallet?.publicKey;
 
   const getNfts = async (address: PublicKey) => {
     try {
-      const connection = new Connection("https://api.metaplex.solana.com/");
-      const mx = Metaplex.make(connection);
+      const mx = getMetaplex();
       const assets = await mx.nfts().findAllByOwner({ owner: address });
-      if (assets.length > 0) {
-        console.log("asset", assets);
-        const listRequest: AxiosPromise<INFT>[] = assets.map((asset) => {
-          const { uri } = asset;
-          return axios.get(uri);
+
+      if (assets.length) {
+        const listRequest = assets.map((asset) => {
+          return mx.nfts().load({ metadata: asset as unknown as any });
         });
         const listResponse = await Promise.all(listRequest);
-        setListNfts(listResponse.map((res) => res.data));
+
+        setListNfts(listResponse.map((res) => res));
       }
     } catch (error) {
       console.log("error", error);
@@ -81,18 +84,21 @@ const ChangeAvatarModal = () => {
               {listNfts.map((i, index) => (
                 <Image
                   key={`nft-${index}`}
-                  src={i.image}
+                  src={i?.json?.image}
                   width={100}
                   height={100}
                   alt={`nft-${i.name}`}
                   loader={({ src }) => src}
+                  onClick={() => setSelectedNft(i)}
                 />
               ))}
             </div>
             {/* <!-- end body --> */}
 
             <div className="modal-footer">
-              <div className="flex items-center justify-center space-x-4"></div>
+              <div className="flex items-center justify-center space-x-4">
+                You select {selectedNft && selectedNft.mint.address.toBase58()}
+              </div>
             </div>
           </div>
         </div>

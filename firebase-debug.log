@@ -1,0 +1,52 @@
+[debug] [2023-02-27T09:03:43.278Z] ----------------------------------------------------------------------
+[debug] [2023-02-27T09:03:43.280Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ADMIN\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-02-27T09:03:43.281Z] CLI Version:   11.23.1
+[debug] [2023-02-27T09:03:43.281Z] Platform:      win32
+[debug] [2023-02-27T09:03:43.281Z] Node Version:  v18.14.2
+[debug] [2023-02-27T09:03:43.282Z] Time:          Mon Feb 27 2023 16:03:43 GMT+0700 (Giờ Đông Dương)
+[debug] [2023-02-27T09:03:43.282Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-27T09:03:43.285Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-02-27T09:03:43.362Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-27T09:03:43.363Z] > authorizing via signed-in user (khoanguyen96.dev@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\SideProject\xhibiter\solcial-ui
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[debug] [2023-02-27T09:03:43.845Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-02-27T09:03:43.845Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-02-27T09:04:18.583Z] Using project from CLI flag: solcial-a1dcb
+[debug] [2023-02-27T09:04:18.584Z] > refreshing access token with scopes: []
+[debug] [2023-02-27T09:04:18.585Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-27T09:04:18.585Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-27T09:04:18.746Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-02-27T09:04:18.746Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-27T09:04:18.751Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/solcial-a1dcb [none]
+[debug] [2023-02-27T09:04:19.191Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/solcial-a1dcb 200
+[debug] [2023-02-27T09:04:19.191Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/solcial-a1dcb {"projectId":"solcial-a1dcb","projectNumber":"224628524587","displayName":"solcial","name":"projects/solcial-a1dcb","resources":{"hostingSite":"solcial-a1dcb"},"state":"ACTIVE","etag":"1_21fed004-6b65-4f92-a0c2-b596fd37680f"}
+[info] i  Using project solcial-a1dcb (solcial) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
