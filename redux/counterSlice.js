@@ -15,6 +15,7 @@ const initialState = {
   buyModal: false,
   propartiesModalValue: false,
   trendingCategorySorText: "",
+  changeAvatarModal: false,
 };
 
 export const counterSlice = createSlice({
@@ -54,6 +55,12 @@ export const counterSlice = createSlice({
     },
     buyModalHide: (state) => {
       state.buyModal = false;
+    },
+    showChangeAvatarModal: (state) => {
+      state.changeAvatarModal = true;
+    },
+    hideChangeAvatarModal: (state) => {
+      state.changeAvatarModal = false;
     },
     showPropatiesModal: (state) => {
       state.propartiesModalValue = true;
@@ -186,6 +193,8 @@ export const {
   updateRenkingData,
   updateRenkingDataByBlockchain,
   updateRenkingDataByPostdate,
+  showChangeAvatarModal,
+  hideChangeAvatarModal,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

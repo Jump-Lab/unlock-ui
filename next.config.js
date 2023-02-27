@@ -4,6 +4,12 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   images: {
     loader: "custom",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.arweave.net",
+      },
+    ],
   },
 };
 
