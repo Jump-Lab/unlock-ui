@@ -7,8 +7,8 @@ import { hideChangeAvatarModal } from "redux/counterSlice";
 import { useEffect, useState } from "react";
 import { INFT } from "types/nft";
 import Image from "next/image";
-import { getMetaplex } from "utils/getMetaplex";
 import { Nft, NftWithToken, Sft } from "@metaplex-foundation/js";
+import { getMetaplex } from "utils/metaplex";
 
 const ChangeAvatarModal = () => {
   const dispatch = useDispatch();
