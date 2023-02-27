@@ -1,4 +1,4 @@
-import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import LitJsSdk from "@lit-protocol/sdk-browser";
 import { LitArgs } from "./metadata";
 import { NETWORK, solRpcConditions } from "./utils";
 
@@ -9,19 +9,16 @@ import { NETWORK, solRpcConditions } from "./utils";
  * @param litArgs - build default with ./util
  * @returns {Promise<{key: Uint8Array, file: File}>}
  */
-export async function encrypt(files, litArgs: LitArgs) {
+export async function encrypt(files: File[], litArgs: LitArgs) {
   const client = new LitJsSdk.LitNodeClient({ debug: true });
-  console.log("connecting to LIT network");
   await client.connect();
-  console.log("invoking signature request");
+  window.litNodeClient = client;
   const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: NETWORK });
 
-  console.log("encrypting files");
   const { encryptedZip, symmetricKey } = await LitJsSdk.zipAndEncryptFiles(
     files
   );
 
-  console.log("pushing key to network");
   const encryptedSymmetricKey = await client.saveEncryptionKey({
     solRpcConditions: solRpcConditions(litArgs),
     chain: NETWORK,

@@ -3,9 +3,11 @@ import { FileUploader } from "react-drag-drop-files";
 import { useConnectedWallet } from "@saberhq/use-solana";
 
 import Meta from "components/Meta";
-import { defaultLitArgs } from "utils/lit/utils";
+import { defaultLitArgs, solRpcConditions } from "utils/lit";
 import { encrypt } from "utils/lit/encrypt";
 import { useMetaplex } from "providers";
+import { httpRequest } from "apis";
+import { HTTP_METHODS } from "constant";
 
 const FILE_TYPES = [
   "JPG",
@@ -25,17 +27,33 @@ const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 
 const Create = () => {
   const [content, setContent] = useState("");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<File>();
   const { metaplex } = useMetaplex();
   const wallet = useConnectedWallet();
 
   const onChangeFile = (file) => {
-    setFile(file.name);
+    setFile(file);
   };
 
   const onSubmit = async () => {
     const litArgs = defaultLitArgs(TEST_MINT);
-    const encrypted = await encrypt([file], litArgs);
+    const { key, file: encryptedZipFile } = await encrypt([file], litArgs);
+    const solConditions = solRpcConditions(litArgs);
+    const encryptionData = {
+      encryptedSymmetricKey: key,
+      solRpcConditions: solConditions,
+    };
+
+    const requestParams = {
+      url: `/upload`,
+      method: HTTP_METHODS.POST,
+      data: {file: encryptedZipFile},
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+    const fileBundlrLink = await httpRequest(requestParams)
+    console.log("Log ~ file: index.tsx:50 ~ onSubmit ~ fileBundlrLink:", fileBundlrLink)
   };
 
   return (
@@ -87,7 +105,7 @@ const Create = () => {
 
               {file ? (
                 <p className="dark:text-jacarta-300 text-2xs mb-3">
-                  successfully uploaded : {file}
+                  successfully uploaded : {file.name}
                 </p>
               ) : (
                 <p className="dark:text-jacarta-300 text-2xs mb-3">
