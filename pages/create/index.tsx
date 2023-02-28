@@ -47,13 +47,16 @@ const Create = () => {
     const requestParams = {
       url: `/upload`,
       method: HTTP_METHODS.POST,
-      data: {file: encryptedZipFile},
+      data: { file: encryptedZipFile },
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-    const fileBundlrLink = await httpRequest(requestParams)
-    console.log("Log ~ file: index.tsx:50 ~ onSubmit ~ fileBundlrLink:", fileBundlrLink)
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    const fileBundlrLink = await httpRequest(requestParams);
+    console.log(
+      "Log ~ file: index.tsx:50 ~ onSubmit ~ fileBundlrLink:",
+      fileBundlrLink
+    );
   };
 
   return (

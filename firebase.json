@@ -5,12 +5,16 @@
     "cleanUrls": true,
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "regex": "^/profile/([^/]+?)(?:/)?$",
+        "destination": "/profile/[profile].html"
       },
       {
-        "source": "/user/**",
-        "dynamicLinks": true
+        "regex": "^/user/([^/]+?)(?:/)?$",
+        "destination": "/user/[user].html"
+      },
+      {
+        "regex": "^/(?:/)?$",
+        "destination": "/index.html"
       }
     ]
   }
