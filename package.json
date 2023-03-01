@@ -41,6 +41,7 @@
     "react-countdown": "^2.3.2",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.7",
+    "react-hook-form": "^7.43.3",
     "react-icomoon": "^2.5.4",
     "react-icons": "^4.4.0",
     "react-modal-video": "^2.0.0",

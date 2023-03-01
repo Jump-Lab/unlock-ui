@@ -7,12 +7,21 @@ import Head from "next/head";
 import Meta from "../../components/Meta";
 import { useDispatch } from "react-redux";
 import { showChangeAvatarModal } from "redux/counterSlice";
+import { useForm } from "react-hook-form";
+import { useWallet } from "@saberhq/use-solana";
+import { FormUpdateProfileValues } from "types";
 
 const Edit_user = () => {
   const [profilePhoto, setProfilePhoto] = useState();
   const [coverePhoto, setCoverePhoto] = useState();
   const [preview, setPreview] = useState();
   const [coverPreview, setCoverPreview] = useState();
+  const { register, handleSubmit, setValue, reset } =
+    useForm<FormUpdateProfileValues>();
+  const { wallet } = useWallet();
+  const walletAddress = wallet?.publicKey?.toBase58() || "";
+
+  const submitForm = (d) => console.log("data", d);
 
   const dispatch = useDispatch();
 
@@ -38,7 +47,7 @@ const Edit_user = () => {
     if (profilePhoto) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result);
+        setPreview(reader.result as unknown as any);
       };
       reader.readAsDataURL(profilePhoto);
     } else {
@@ -50,13 +59,28 @@ const Edit_user = () => {
     if (coverePhoto) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setCoverPreview(reader.result);
+        setCoverPreview(reader.result as unknown as any);
       };
       reader.readAsDataURL(coverePhoto);
     } else {
       setCoverPreview(null);
     }
   }, [coverePhoto]);
+
+  useEffect(() => {
+    if (walletAddress) {
+      setValue("username", walletAddress);
+    } else {
+      reset();
+    }
+  }, [reset, setValue, walletAddress]);
+
+  if (walletAddress === "")
+    return (
+      <div className="h-[600px] min-h-[400px] w-full text-red pt-[5.5rem] lg:pt-24">
+        Please connect wallet first
+      </div>
+    );
 
   return (
     <div>
@@ -106,17 +130,23 @@ const Edit_user = () => {
           <div className="container">
             <div className="mx-auto max-w-[48.125rem] md:flex">
               {/* <!-- Form --> */}
-              <div className="mb-12 md:w-1/2 md:pr-8">
+              <form
+                onSubmit={handleSubmit(submitForm)}
+                className="mb-12 md:w-1/2 md:pr-8"
+              >
                 <div className="mb-6">
                   <label className="font-display text-jacarta-700 mb-1 block text-sm dark:text-white">
                     Username<span className="text-red">*</span>
                   </label>
                   <input
+                    disabled
                     type="text"
                     id="profile-username"
                     className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 hover:ring-2 dark:text-white px-3"
                     placeholder="Enter username"
-                    required
+                    {...register("username", {
+                      required: true,
+                    })}
                   />
                 </div>
                 <div className="mb-6">
@@ -126,8 +156,8 @@ const Edit_user = () => {
                   <textarea
                     id="profile-bio"
                     className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 hover:ring-2 dark:text-white px-3"
-                    required
                     placeholder="Tell the world your story!"
+                    {...register("bio", { required: true })}
                   ></textarea>
                 </div>
                 <div className="mb-6">
@@ -139,12 +169,12 @@ const Edit_user = () => {
                     id="profile-email"
                     className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 hover:ring-2 dark:text-white px-3"
                     placeholder="Enter email"
-                    required
+                    {...register("email", { required: true })}
                   />
                 </div>
                 <div className="mb-6">
                   <label className="font-display text-jacarta-700 mb-1 block text-sm dark:text-white">
-                    Links<span className="text-red">*</span>
+                    Links
                   </label>
                   <div className="relative">
                     <svg
@@ -164,6 +194,7 @@ const Edit_user = () => {
                       id="profile-twitter"
                       className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-t-lg py-3 pl-10 hover:ring-2 focus:ring-inset dark:text-white"
                       placeholder="@twittername"
+                      {...register("twitter")}
                     />
                   </div>
                   <div className="relative">
@@ -184,6 +215,7 @@ const Edit_user = () => {
                       id="profile-instagram"
                       className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 -mt-px w-full py-3 pl-10 hover:ring-2 focus:ring-inset dark:text-white"
                       placeholder="instagramname"
+                      {...register("instagram")}
                     />
                   </div>
                   <div className="relative">
@@ -198,14 +230,15 @@ const Edit_user = () => {
                       <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-2.29-2.333A17.9 17.9 0 0 1 8.027 13H4.062a8.008 8.008 0 0 0 5.648 6.667zM10.03 13c.151 2.439.848 4.73 1.97 6.752A15.905 15.905 0 0 0 13.97 13h-3.94zm9.908 0h-3.965a17.9 17.9 0 0 1-1.683 6.667A8.008 8.008 0 0 0 19.938 13zM4.062 11h3.965A17.9 17.9 0 0 1 9.71 4.333 8.008 8.008 0 0 0 4.062 11zm5.969 0h3.938A15.905 15.905 0 0 0 12 4.248 15.905 15.905 0 0 0 10.03 11zm4.259-6.667A17.9 17.9 0 0 1 15.973 11h3.965a8.008 8.008 0 0 0-5.648-6.667z" />
                     </svg>
                     <input
-                      type="url"
+                      type="text"
                       id="profile-website"
                       className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 -mt-px w-full rounded-b-lg py-3 pl-10 hover:ring-2 focus:ring-inset dark:text-white"
                       placeholder="yoursitename.com"
+                      {...register("website")}
                     />
                   </div>
                 </div>
-                <div className="mb-6">
+                {/* <div className="mb-6">
                   <label className="font-display text-jacarta-700 mb-1 block text-sm dark:text-white">
                     Wallet Address
                   </label>
@@ -214,14 +247,14 @@ const Edit_user = () => {
                     classes="js-copy-clipboard dark:bg-jacarta-700 border-jacarta-100 hover:bg-jacarta-50 dark:border-jacarta-600 dark:text-jacarta-300 flex w-full select-none items-center rounded-lg border bg-white py-3 px-4"
                     userId="0x7a9fe22691c811ea339401bbb2leb"
                   />
-                </div>
+                </div> */}
                 <button className="bg-accent shadow-accent-volume hover:bg-accent-dark rounded-full py-3 px-8 text-center font-semibold text-white transition-all">
                   Update Profile
                 </button>
-              </div>
+              </form>
               {/* <!-- Avatar --> */}
               <div className="flex space-x-5 md:w-1/2 md:pl-8">
-                <form className="shrink-0">
+                <div className="shrink-0">
                   <figure className="relative inline-block">
                     <Image
                       src={preview ? preview : "/images/user/user_avatar.gif"}
@@ -255,7 +288,7 @@ const Edit_user = () => {
                       </div>
                     </div>
                   </figure>
-                </form>
+                </div>
                 <div className="mt-4">
                   <span className="font-display text-jacarta-700 mb-3 block text-sm dark:text-white">
                     Profile Image
