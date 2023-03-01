@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Tippy from "@tippyjs/react";
-import CopyToClipboard from "react-copy-to-clipboard";
-import Image from "next/image";
-import UserId from "../../components/userId";
-import Head from "next/head";
-import Meta from "../../components/Meta";
 import { useDispatch } from "react-redux";
-import { showChangeAvatarModal } from "redux/counterSlice";
 import { useForm } from "react-hook-form";
 import { useWallet } from "@saberhq/use-solana";
+import Image from "next/image";
+
+import Meta from "components/Meta";
+import { showChangeAvatarModal } from "redux/counterSlice";
 import { FormUpdateProfileValues } from "types";
 
 const Edit_user = () => {
@@ -73,7 +70,7 @@ const Edit_user = () => {
     } else {
       reset();
     }
-  }, [reset, setValue, walletAddress]);
+  }, [walletAddress]);
 
   if (walletAddress === "")
     return (

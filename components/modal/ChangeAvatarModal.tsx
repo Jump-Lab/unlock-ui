@@ -1,13 +1,11 @@
+import { useEffect, useState } from "react";
+import { Nft, NftWithToken, Sft } from "@metaplex-foundation/js";
 import { useConnectedWallet } from "@saberhq/use-solana";
 import { useSelector, useDispatch } from "react-redux";
 import { PublicKey } from "@solana/web3.js";
-import axios, { AxiosPromise } from "axios";
+import Image from "next/image";
 
 import { hideChangeAvatarModal } from "redux/counterSlice";
-import { useEffect, useState } from "react";
-import { INFT } from "types/nft";
-import Image from "next/image";
-import { Nft, NftWithToken, Sft } from "@metaplex-foundation/js";
 import { getMetaplex } from "utils/metaplex";
 
 const ChangeAvatarModal = () => {
@@ -51,7 +49,6 @@ const ChangeAvatarModal = () => {
 
   return (
     <div>
-      {/* <!-- Buy Now Modal --> */}
       <div
         className={changeAvatarModal ? "modal fade show block" : "modal fade"}
       >
@@ -97,7 +94,7 @@ const ChangeAvatarModal = () => {
 
             <div className="modal-footer">
               <div className="flex items-center justify-center space-x-4">
-                You select {selectedNft && selectedNft.mint.address.toBase58()}
+                You selected {selectedNft && selectedNft.mint.address.toBase58()}
               </div>
             </div>
           </div>
