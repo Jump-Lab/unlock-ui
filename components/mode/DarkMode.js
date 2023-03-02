@@ -8,6 +8,7 @@ export default function DarkMode() {
     if (theme === "light") setTheme("dark");
     else setTheme("light");
   };
+
   return (
     <>
       <button

@@ -94,7 +94,8 @@ const ChangeAvatarModal = () => {
 
             <div className="modal-footer">
               <div className="flex items-center justify-center space-x-4">
-                You selected {selectedNft && selectedNft.mint.address.toBase58()}
+                You selected{" "}
+                {selectedNft && selectedNft.mint.address.toBase58()}
               </div>
             </div>
           </div>

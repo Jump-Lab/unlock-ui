@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
 import { walletModalShow } from "../../redux/counterSlice";
-import { useMetaMask } from "metamask-react";
 
 export default function WalletButtonLight() {
   const dispath = useDispatch();
-  const { status, connect, account, chainId, ethereum } = useMetaMask();
+  const { status } = {status: 'initializing'}
 
   const walletHandler = () => {
     if (status === "unavailable") {
@@ -37,7 +36,6 @@ export default function WalletButtonLight() {
   if (status === "notConnected")
     return (
       <button
-        onClick={connect}
         className="js-wallet border-jacarta-100  focus:bg-accent group hover:bg-accent flex h-10 w-10 items-center justify-center rounded-full border bg-white transition-colors hover:border-transparent focus:border-transparent border-transparent bg-white/[.15]"
       >
         <svg
