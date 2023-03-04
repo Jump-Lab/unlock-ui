@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import WalletButton from "../wallet-btn/WalletButton";
 
 export default function Header01() {
-  console.log('HEADER 1')
+  console.log("HEADER 1");
   const [toggle, setToggle] = useState(false);
   const [isCollapse, setCollapse] = useState(null);
 
@@ -305,7 +305,6 @@ export default function Header01() {
           </span>
         </form>
         {/* End search form mobile menu  */}
-
 
         {/* End navbar mobile menu  */}
 

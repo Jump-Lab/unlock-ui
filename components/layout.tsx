@@ -8,7 +8,7 @@ import ChangeAvatarModal from "./modal/ChangeAvatarModal";
 export default function Layout({ children }) {
   return (
     <>
-      <Header/>
+      <Header />
       <Wallet_modal />
       <BidsModal />
       <BuyModal />

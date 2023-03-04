@@ -1,2 +1,2 @@
-export * from "./MetaplexProvider";
+export * from "./ProgramProvider";
 export * from "./WalletProvider";

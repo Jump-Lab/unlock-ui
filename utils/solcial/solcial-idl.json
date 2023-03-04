@@ -1,0 +1,87 @@
+{
+  "version": "0.1.0",
+  "name": "solcial",
+  "instructions": [
+    {
+      "name": "createUser",
+      "accounts": [
+        { "name": "user", "isMut": true, "isSigner": false },
+        { "name": "signer", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "userData", "type": { "defined": "UserData" } }]
+    },
+    {
+      "name": "updateUser",
+      "accounts": [
+        { "name": "user", "isMut": true, "isSigner": false },
+        { "name": "signer", "isMut": false, "isSigner": true }
+      ],
+      "args": [{ "name": "userData", "type": { "defined": "UserData" } }]
+    },
+    {
+      "name": "createComment",
+      "accounts": [
+        { "name": "comment", "isMut": true, "isSigner": true },
+        { "name": "signer", "isMut": true, "isSigner": true },
+        { "name": "clock", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "postAddress", "type": "publicKey" },
+        { "name": "text", "type": "string" }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "User",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "username", "type": "string" },
+          { "name": "headline", "type": "string" },
+          { "name": "signer", "type": "publicKey" },
+          { "name": "gender", "type": "u8" },
+          { "name": "dateOfBirth", "type": "u64" }
+        ]
+      }
+    },
+    {
+      "name": "Comment",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "text", "type": "string" },
+          { "name": "postAddress", "type": "publicKey" },
+          { "name": "signer", "type": "publicKey" },
+          { "name": "createdAt", "type": "i64" }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "UserData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "username", "type": "string" },
+          { "name": "headline", "type": "string" },
+          { "name": "gender", "type": "u8" },
+          { "name": "dateOfBirth", "type": "u64" }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "TooLongUsername", "msg": "Username is too long." },
+    { "code": 6001, "name": "TooLongHeadline", "msg": "Headline is too long." },
+    {
+      "code": 6002,
+      "name": "CannotCreatePost",
+      "msg": "Description or asset url is required."
+    },
+    { "code": 6003, "name": "TooLongText", "msg": "Text is too long." }
+  ]
+}
