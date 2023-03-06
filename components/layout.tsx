@@ -4,6 +4,7 @@ import BidsModal from "./modal/bidsModal";
 import BuyModal from "./modal/buyModal";
 import Header from "./header";
 import ChangeAvatarModal from "./modal/ChangeAvatarModal";
+import CreatePostModal from "./modal/CreatePostModal";
 
 export default function Layout({ children }) {
   return (
@@ -13,6 +14,7 @@ export default function Layout({ children }) {
       <BidsModal />
       <BuyModal />
       <ChangeAvatarModal />
+      <CreatePostModal />
       <main>{children}</main>
       <Footer />
     </>
