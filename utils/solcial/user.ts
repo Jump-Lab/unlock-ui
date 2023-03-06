@@ -2,6 +2,7 @@ import { ConnectedWallet } from "@saberhq/use-solana";
 import * as anchor from "@project-serum/anchor";
 
 import { UserData } from "types";
+import { TransactionInstruction } from "@solana/web3.js";
 
 export async function getCreateUserInstruction(
   userData: UserData,
@@ -21,12 +22,13 @@ export async function getCreateUserInstruction(
       );
       const accounts = {
         user: userPda,
+        signer: wallet.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
       };
-      const tx = await solcialProgram.methods
+      const tx = (await solcialProgram.methods
         .createUser(preparedUserData)
         .accounts(accounts)
-        .instruction();
+        .instruction()) as TransactionInstruction;
       return tx;
     } else {
       throw new Error("Wallet not connected");

@@ -9,6 +9,10 @@ import { useProgram } from "providers";
 import { httpRequest } from "apis";
 import { HTTP_METHODS } from "constant";
 import { useUser } from "providers/UserProvider";
+import { Transaction } from "@solana/web3.js";
+import { getCreateUserInstruction } from "utils/solcial";
+import { createNft } from "utils/metaplex";
+import { TransactionBuilder } from "@metaplex-foundation/js";
 
 const FILE_TYPES = [
   "JPG",
@@ -29,7 +33,7 @@ const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 const Create = () => {
   const [content, setContent] = useState("");
   const [file, setFile] = useState<File>();
-  const { metaplex } = useProgram();
+  const { solcialProgram, metaplex } = useProgram();
   const { user } = useUser();
   console.log("Log ~ file: index.tsx:34 ~ Create ~ user:", user);
   const wallet = useConnectedWallet();
@@ -39,23 +43,28 @@ const Create = () => {
   };
 
   const onSubmit = async () => {
-    const litArgs = defaultLitArgs(TEST_MINT);
-    const { key, file: encryptedZipFile } = await encrypt([file], litArgs);
-    const solConditions = solRpcConditions(litArgs);
-    const encryptionData = {
-      encryptedSymmetricKey: key,
-      solRpcConditions: solConditions,
-    };
+    try {
+      if (wallet.connected) {
+        const litArgs = defaultLitArgs(TEST_MINT);
+        const { key, file: encryptedZipFile } = await encrypt([file], litArgs);
+        const solConditions = solRpcConditions(litArgs);
+        const encryptionData = {
+          encryptedSymmetricKey: key,
+          solRpcConditions: solConditions,
+        };
 
-    // const requestParams = {
-    //   url: `/upload`,
-    //   method: HTTP_METHODS.POST,
-    //   data: { file: encryptedZipFile },
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // };
-    // const fileBundlrLink = await httpRequest(requestParams);
+        await createNft(
+          {
+            ...encryptionData,
+            description: "my descriptionnnn",
+            file: encryptedZipFile,
+          },
+          metaplex
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

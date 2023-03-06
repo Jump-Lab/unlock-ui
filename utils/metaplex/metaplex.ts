@@ -3,7 +3,7 @@ import { Cluster, clusterApiUrl, Connection } from "@solana/web3.js";
 import { nftStorage } from "@metaplex-foundation/js-plugin-nft-storage";
 import { ConnectedWallet } from "@saberhq/use-solana";
 
-export const getMetaplex = (wallet: ConnectedWallet) => {
+export const getMetaplex = (wallet?: ConnectedWallet) => {
   const connection = new Connection(
     clusterApiUrl(process.env.NEXT_PUBLIC_SOLANA_CLUSTER as Cluster),
     {
