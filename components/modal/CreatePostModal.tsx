@@ -4,62 +4,70 @@ import { useConnectedWallet } from "@saberhq/use-solana";
 import { useSelector, useDispatch } from "react-redux";
 import { PublicKey } from "@solana/web3.js";
 import Image from "next/image";
+import { FileUploader } from "react-drag-drop-files";
 
 import { hideCreatePostModal } from "redux/counterSlice";
-import { getMetaplex } from "utils/metaplex";
+import { createNft, getMetaplex } from "utils/metaplex";
 import myImageLoader from "utils/loader";
+import { defaultLitArgs, encrypt, solRpcConditions } from "utils/lit";
+import { useProgram } from "providers";
+
+const FILE_TYPES = [
+  "JPG",
+  "JPEG",
+  "PNG",
+  "GIF",
+  "SVG",
+  "MP4",
+  "WEBM",
+  "MP3",
+  "WAV",
+  "OGG",
+  "GLB",
+  "GLTF",
+];
+const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 
 interface IProps {}
 
-interface RenderImageProps {
-  type?: "image" | "create";
-}
-
-const RenderImage: React.FC<RenderImageProps> = ({ type }) => {
-  if (type === "image")
-    return (
-      <div className="relative group w-[214px] h-[120px] rounded-large overflow-hidden">
-        <Image
-          src="./images/blog/post_1.jpg"
-          fill
-          alt="image"
-          loader={myImageLoader}
-        />
-        <div className="bg-jacarta-900/60 top-0 left-0 right-0 bottom-0 absolute flex items-center justify-center group-hover:opacity-100 opacity-0 group-hover:z-10 z-0 duration-100 transition-opacity">
-          <button className="flex items-center gap-x-2 bg-accent-dark rounded-7x px-4 py-3">
-            <Image
-              src="./images/edit.svg"
-              width={24}
-              height={24}
-              alt="edit_icon"
-              className="rounded-large"
-              loader={myImageLoader}
-            />
-            <span>Edit</span>
-          </button>
-        </div>
-      </div>
-    );
-
-  return (
-    <div className="w-[214px] h-[120px] rounded-large bg-jacarta-800 border border-dashed border-jacarta-600 font-body flex items-center justify-center cursor-pointer">
-      <div className="flex items-center gap-x-4">
-        <Image
-          src="./images/plus.svg"
-          width={24}
-          height={24}
-          alt="plus"
-          loader={myImageLoader}
-        />
-        <p className="text-base font-bold text-jacarta-300">Add new</p>
-      </div>
-    </div>
-  );
-};
-
 const CreatePostModal: React.FC<IProps> = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState<File>();
+
   const dispatch = useDispatch();
   const { createPostModal } = useSelector((state: any) => state.counter);
+  const wallet = useConnectedWallet();
+  const { solcialProgram, metaplex } = useProgram();
+
+  const onChangeFile = (file) => {
+    setFile(file);
+  };
+
+  const onSubmit = async () => {
+    try {
+      if (wallet.connected) {
+        const litArgs = defaultLitArgs(TEST_MINT);
+        const { key, file: encryptedZipFile } = await encrypt([file], litArgs);
+        const solConditions = solRpcConditions(litArgs);
+        const encryptionData = {
+          encryptedSymmetricKey: key,
+          solRpcConditions: solConditions,
+        };
+
+        await createNft(
+          {
+            ...encryptionData,
+            description: "my descriptionnnn",
+            file: encryptedZipFile,
+          },
+          metaplex
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="">
       <div className={createPostModal ? "modal fade show block" : "modal fade"}>
@@ -89,108 +97,86 @@ const CreatePostModal: React.FC<IProps> = () => {
 
             {/* <!-- Body --> */}
             <div className="modal-body p-6">
-              <div className="flex items-center gap-x-3">
-                <Image
-                  src="./images/avatars/frame_2.png"
-                  width={64}
-                  height={64}
-                  className="rounded-full"
-                  alt="avatar"
-                  loader={myImageLoader}
-                />
-                <div>
-                  <p className="text-jacarta-100 text-lg leading-6 font-semibold mb-3">
-                    Ha Huyen Chi
-                  </p>
-                  <select
-                    name="cars"
-                    id="cars"
-                    className="text-black text-left text-jacarta-200 px-4 py-[2px] bg-jacarta-600 border border-jacarta-600 rounded-lg font-body text-2xs"
-                  >
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                  </select>
-                </div>
-              </div>
               {/* contenteditable */}
-              <div
-                contentEditable
-                className="mt-6 text-jacarta-200 text-lg leading-6 font-semibold focus:outline-none h-60"
-              >
-                <p className="text-jacarta-500 text-lg leading-6">
-                  What&apos;s on your mind?
-                </p>
-              </div>
-              <div className="flex gap-x-3 mb-6">
-                <RenderImage type="image" />
-                <RenderImage />
-                <RenderImage />
-              </div>
-              <button
-                type="button"
-                className=" bg-jacarta-600 p-4 rounded-full mb-6"
-              >
-                <Image
-                  src="./images/plus.svg"
-                  width={24}
-                  height={24}
-                  alt="plus"
-                  loader={myImageLoader}
-                />
-              </button>
-              <div className="p-7 rounded-4x bg-jacarta-800 flex items-center gap-x-6">
-                <div className="flex gap-x-2 items-center cursor-pointer">
-                  <Image
-                    src="./images/add_image_fill.svg"
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                    alt="add_image"
-                    loader={myImageLoader}
+              <div className="mt-6 mx-auto">
+                {/* <!-- Description --> */}
+                <div className="mb-6">
+                  <label
+                    htmlFor="item-title"
+                    className="font-display text-jacarta-700 mb-2 block dark:text-white"
+                  >
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    id="item-title"
+                    className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 px-3 hover:ring-2 dark:text-white"
+                    placeholder="Title"
                   />
-                  <p className="text-base leading-6 text-jacarta-100">
-                    Add Images
-                  </p>
                 </div>
-                <div className="flex gap-x-2 items-center cursor-pointer">
-                  <Image
-                    src="./images/record_fill.svg"
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                    alt="record"
-                    loader={myImageLoader}
-                  />
-                  <p className="text-base leading-6 text-jacarta-100">
-                    Add a Video
-                  </p>
+
+                <div className="mb-6">
+                  <label
+                    htmlFor="item-description"
+                    className="font-display text-jacarta-700 mb-2 block dark:text-white"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    id="item-description"
+                    className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 px-3 hover:ring-2 dark:text-white"
+                    rows={4}
+                    placeholder="Description"
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
                 </div>
-                <div className="flex gap-x-2 items-center cursor-pointer">
-                  <Image
-                    src="./images/checkin_fill.svg"
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                    alt="checkin"
-                    loader={myImageLoader}
-                  />
-                  <p className="text-base leading-6 text-jacarta-100">
-                    Share your position
-                  </p>
-                </div>
-                <div className="flex gap-x-2 items-center cursor-pointer">
-                  <Image
-                    src="./images/emoticon.svg"
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                    alt="emoticon"
-                    loader={myImageLoader}
-                  />
-                  <p className="text-base leading-6 text-jacarta-100">
-                    Share your emotions
-                  </p>
+
+                {/* <!-- File Upload --> */}
+                <div className="mb-6">
+                  <label className="font-display text-jacarta-700 mb-2 block dark:text-white">
+                    Image, Video, Audio, or 3D Model
+                  </label>
+
+                  {file ? (
+                    <p className="dark:text-jacarta-300 text-2xs mb-3">
+                      successfully uploaded : {file.name}
+                    </p>
+                  ) : (
+                    <p className="dark:text-jacarta-300 text-2xs mb-3">
+                      Drag or choose your file to upload
+                    </p>
+                  )}
+
+                  <div className="dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 group relative flex max-w-md flex-col items-center justify-center rounded-lg border-2 border-dashed bg-white py-20 px-5 text-center">
+                    <div className="relative z-10 cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        className="fill-jacarta-500 mb-4 inline-block dark:fill-white"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 13l6.964 4.062-2.973.85 2.125 3.681-1.732 1-2.125-3.68-2.223 2.15L16 13zm-2-7h2v2h5a1 1 0 0 1 1 1v4h-2v-3H10v10h4v2H9a1 1 0 0 1-1-1v-5H6v-2h2V9a1 1 0 0 1 1-1h5V6zM4 14v2H2v-2h2zm0-4v2H2v-2h2zm0-4v2H2V6h2zm0-4v2H2V2h2zm4 0v2H6V2h2zm4 0v2h-2V2h2zm4 0v2h-2V2h2z" />
+                      </svg>
+                      <p className="dark:text-jacarta-300 mx-auto max-w-xs text-xs">
+                        JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF.
+                        Max size: 100 MB
+                      </p>
+                    </div>
+                    <div className="dark:bg-jacarta-600 bg-jacarta-50 absolute inset-4 cursor-pointer rounded opacity-0 group-hover:opacity-100 ">
+                      <FileUploader
+                        handleChange={onChangeFile}
+                        onDrop={onChangeFile}
+                        multiple={false}
+                        name="file"
+                        types={FILE_TYPES}
+                        classes="file-drag"
+                        maxSize={100}
+                        minSize={0}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

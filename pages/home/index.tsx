@@ -15,7 +15,7 @@ const Home_2 = () => {
   return (
     <>
       <Meta title="Home 2" />
-      <div className="container pt-24 flex gap-x-8">
+      <div className="container pt-32 flex gap-x-8">
         <Information />
         <Newsfeed />
       </div>

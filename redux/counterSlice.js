@@ -64,7 +64,7 @@ export const counterSlice = createSlice({
       state.changeAvatarModal = false;
     },
     showCreatePostModal: (state) => {
-      state.changeAvatarModal = true;
+      state.createPostModal = true;
     },
     hideCreatePostModal: (state) => {
       state.createPostModal = false;

@@ -13,13 +13,12 @@ const CreatePost = () => {
           loader={() => "./images/avatars/frame_2.png"}
         />
         <div className="flex-1 ">
-          <textarea
+          <input
             className="w-full border border-jacarta-700 bg-jacarta-600 rounded-lg placeholder:text-white py-3 px-4 mb-5"
-            name="post"
+            name="name"
             id=""
-            rows={5}
-            placeholder="What's on your mind?"
-          ></textarea>
+            placeholder="Create Post"
+          />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-3">
               <button>
