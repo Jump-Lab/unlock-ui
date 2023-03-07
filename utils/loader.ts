@@ -1,5 +1,5 @@
-import { ImageLoader } from "next/image";
+import { ImageLoaderProps } from "next/image";
 
-export default function myImageLoader(i: ImageLoader) {
-  return i;
+export default function myImageLoader(i: ImageLoaderProps) {
+  return i.src;
 }

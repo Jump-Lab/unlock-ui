@@ -16,7 +16,7 @@ const initialState = {
   propartiesModalValue: false,
   trendingCategorySorText: "",
   changeAvatarModal: false,
-  createPostModal: false,
+  createPostModal: true,
 };
 
 export const counterSlice = createSlice({
@@ -64,10 +64,10 @@ export const counterSlice = createSlice({
       state.changeAvatarModal = false;
     },
     showCreatePostModal: (state) => {
-      state.changeAvatarModal = true;
+      state.createPostModal = true;
     },
     hideCreatePostModal: (state) => {
-      state.changeAvatarModal = false;
+      state.createPostModal = false;
     },
     showPropatiesModal: (state) => {
       state.propartiesModalValue = true;
