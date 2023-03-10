@@ -6,11 +6,11 @@ import { PublicKey } from "@solana/web3.js";
 import Image from "next/image";
 import { FileUploader } from "react-drag-drop-files";
 
-import { hideCreatePostModal } from "redux/counterSlice";
 import { createNft, getMetaplex } from "utils/metaplex";
 import myImageLoader from "utils/loader";
 import { defaultLitArgs, encrypt, solRpcConditions } from "utils/lit";
 import { useProgram } from "providers";
+import { setShowCreatePostModal } from "redux/counterSlice";
 
 const FILE_TYPES = [
   "JPG",
@@ -36,7 +36,7 @@ const CreatePostModal: React.FC<IProps> = () => {
   const [file, setFile] = useState<File>();
 
   const dispatch = useDispatch();
-  const { createPostModal } = useSelector((state: any) => state.counter);
+  const { showCreatePostModal } = useSelector((state: any) => state.counter);
   const wallet = useConnectedWallet();
   const { solcialProgram, metaplex } = useProgram();
 
@@ -70,7 +70,9 @@ const CreatePostModal: React.FC<IProps> = () => {
   };
   return (
     <div className="">
-      <div className={createPostModal ? "modal fade show block" : "modal fade"}>
+      <div
+        className={showCreatePostModal ? "modal fade show block" : "modal fade"}
+      >
         <div className="modal-dialog w-1/2 ">
           <div className="modal-content h-[inherit] p-10">
             <div className="modal-header">
@@ -80,7 +82,7 @@ const CreatePostModal: React.FC<IProps> = () => {
               <button
                 type="button"
                 className="btn-close bg-jacarta-600 p-4 rounded-full"
-                onClick={() => dispatch(hideCreatePostModal())}
+                onClick={() => dispatch(setShowCreatePostModal(false))}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,8 +101,8 @@ const CreatePostModal: React.FC<IProps> = () => {
             <div className="modal-body p-6">
               {/* contenteditable */}
               <div className="mt-6 mx-auto">
-                {/* <!-- Description --> */}
                 <div className="mb-6">
+                  {/* <!-- Description --> */}
                   <label
                     htmlFor="item-title"
                     className="font-display text-jacarta-700 mb-2 block dark:text-white"

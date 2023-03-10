@@ -29,6 +29,7 @@ const ChangeAvatarModal = () => {
           return mx.nfts().load({ metadata: asset as unknown as any });
         });
         const listResponse = await Promise.all(listRequest);
+        console.log("Log ~ file: ChangeAvatarModal.tsx:32 ~ getNfts ~ listResponse:", listResponse)
 
         setListNfts(listResponse.map((res) => res));
       }

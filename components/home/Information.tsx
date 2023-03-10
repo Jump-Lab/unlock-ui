@@ -1,10 +1,19 @@
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+
 import myImageLoader from "utils/loader";
+import Button from "components/Button";
+import {
+  setShowCreateCommunityModal,
+  setShowCreatePostModal,
+} from "redux/counterSlice";
 
 const Information = () => {
+  const dispatch = useDispatch();
+
   return (
-    <div className="py-10 px-6 bg-jacarta-700 rounded-5x w-fit h-fit">
-      <div className="flex flex-col items-center gap-3 px-14">
+    <div className="py-6 px-4 bg-jacarta-700 rounded-5x w-fit h-fit divide-y divide-jacarta-600 ">
+      <div className="flex flex-col items-center gap-3 px-14 mb-6">
         <Image
           src="./images/avatars/frame_2.png"
           width={100}
@@ -24,6 +33,21 @@ const Information = () => {
           />
           <p className="text-green text-sm">Hanoi, Vietnam</p>
         </div>
+      </div>
+      <div className="flex flex-col">
+        <Button
+          isPrimary
+          className="mt-6 mb-2"
+          onClick={() => dispatch(setShowCreatePostModal(true))}
+        >
+          Create Post
+        </Button>
+        <Button
+          isSecondary
+          onClick={() => dispatch(setShowCreateCommunityModal(true))}
+        >
+          Create Community
+        </Button>
       </div>
     </div>
   );

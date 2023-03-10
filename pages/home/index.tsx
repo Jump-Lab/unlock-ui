@@ -1,13 +1,6 @@
 import React from "react";
-import Hero_2 from "../../components/hero/hero_2";
-import {
-  Top_collection,
-  Auctions_categories,
-  NewseLatter,
-  Feature_collections,
-  Partners,
-} from "../../components/component";
-import Meta from "../../components/Meta";
+
+import Meta from "components/Meta";
 import Information from "components/home/Information";
 import Newsfeed from "components/home/Newsfeed";
 

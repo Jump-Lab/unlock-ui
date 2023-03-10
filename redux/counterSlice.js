@@ -16,7 +16,8 @@ const initialState = {
   propartiesModalValue: false,
   trendingCategorySorText: "",
   changeAvatarModal: false,
-  createPostModal: true,
+  showCreatePostModal: true,
+  showCreateCommunityModal: true,
 };
 
 export const counterSlice = createSlice({
@@ -63,11 +64,11 @@ export const counterSlice = createSlice({
     hideChangeAvatarModal: (state) => {
       state.changeAvatarModal = false;
     },
-    showCreatePostModal: (state) => {
-      state.createPostModal = true;
+    setShowCreatePostModal: (state, action) => {
+      state.showCreatePostModal = action.payload;
     },
-    hideCreatePostModal: (state) => {
-      state.createPostModal = false;
+    setShowCreateCommunityModal: (state, action) => {
+      state.showCreateCommunityModal = action.payload;
     },
     showPropatiesModal: (state) => {
       state.propartiesModalValue = true;
@@ -202,8 +203,8 @@ export const {
   updateRenkingDataByPostdate,
   showChangeAvatarModal,
   hideChangeAvatarModal,
-  showCreatePostModal,
-  hideCreatePostModal,
+  setShowCreatePostModal,
+  setShowCreateCommunityModal,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;
