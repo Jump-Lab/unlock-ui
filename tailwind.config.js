@@ -47,6 +47,7 @@ module.exports = {
         800: "#101436",
         900: "#0D102D",
       },
+      black: "#000000",
     },
     boxShadow: {
       none: "none",
