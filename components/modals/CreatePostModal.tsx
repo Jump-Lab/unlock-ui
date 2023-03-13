@@ -11,6 +11,8 @@ import myImageLoader from "utils/loader";
 import { defaultLitArgs, encrypt, solRpcConditions } from "utils/lit";
 import { useProgram } from "providers";
 import { setShowCreatePostModal } from "redux/counterSlice";
+import FilePreview from "components/InputGroup/FilePreview";
+import classNames from "classnames";
 
 const FILE_TYPES = [
   "JPG",
@@ -41,6 +43,10 @@ const CreatePostModal: React.FC<IProps> = () => {
   const { solcialProgram, metaplex } = useProgram();
 
   const onChangeFile = (file) => {
+    console.log(
+      "Log ~ file: CreatePostModal.tsx:43 ~ onChangeFile ~ file",
+      file
+    );
     setFile(file);
   };
 
@@ -149,7 +155,12 @@ const CreatePostModal: React.FC<IProps> = () => {
                     </p>
                   )}
 
-                  <div className="dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 group relative flex max-w-md flex-col items-center justify-center rounded-lg border-2 border-dashed bg-white py-20 px-5 text-center">
+                  <div
+                    className={classNames(
+                      "dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 group relative flex max-w-md flex-col items-center justify-center rounded-lg border-2 border-dashed bg-white py-20 px-5 text-center",
+                      file && "hidden"
+                    )}
+                  >
                     <div className="relative z-10 cursor-pointer">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +177,7 @@ const CreatePostModal: React.FC<IProps> = () => {
                         Max size: 100 MB
                       </p>
                     </div>
-                    <div className="dark:bg-jacarta-600 bg-jacarta-50 absolute inset-4 cursor-pointer rounded opacity-0 group-hover:opacity-100 ">
+                    <div className="dark:bg-jacarta-600 bg-jacarta-50 absolute inset-4 cursor-pointer rounded opacity-0 group-hover:opacity-100">
                       <FileUploader
                         handleChange={onChangeFile}
                         onDrop={onChangeFile}
@@ -178,6 +189,19 @@ const CreatePostModal: React.FC<IProps> = () => {
                         minSize={0}
                       />
                     </div>
+                  </div>
+                  <div
+                    className={classNames(
+                      "border-jacarta-100 group relative flex max-w-md flex-col items-center justify-center rounded-lg text-center h-[235px] overflow-hidden",
+                      !file && "hidden"
+                    )}
+                  >
+                    <FilePreview
+                      file={file}
+                      onClickEdit={() => {
+                        setFile(null);
+                      }}
+                    />
                   </div>
                 </div>
               </div>

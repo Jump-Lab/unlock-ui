@@ -1646,6 +1646,10 @@ html {
     height: 6rem;
   }
 
+  .h-30 {
+    height: 7.5rem;
+  }
+
   .h-\[8\.125rem\] {
     height: 8.125rem;
   }
