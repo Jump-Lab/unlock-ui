@@ -12,7 +12,7 @@ const Information = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="py-6 px-4 bg-jacarta-700 rounded-5x w-fit h-fit divide-y divide-jacarta-600 ">
+    <div className="py-6 px-4 bg-jacarta-700 rounded-5x lg:w-fit w-full h-fit divide-y divide-jacarta-600 ">
       <div className="flex flex-col items-center gap-3 px-14 mb-6">
         <Image
           src="./images/avatars/frame_2.png"

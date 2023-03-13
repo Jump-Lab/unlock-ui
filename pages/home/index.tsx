@@ -8,7 +8,7 @@ const Home_2 = () => {
   return (
     <>
       <Meta title="Home 2" />
-      <div className="container pt-32 flex gap-x-8">
+      <div className="container pt-32 flex gap-x-8 gap-y-5 lg:flex-row flex-col">
         <Information />
         <Newsfeed />
       </div>

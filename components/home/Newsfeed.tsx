@@ -10,7 +10,7 @@ const Newsfeed = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 max-w-3xl">
       <div onClick={() => dispatch(setShowCreatePostModal(true))}>
         <CreatePost />
       </div>
