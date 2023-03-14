@@ -8,6 +8,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
   subTitle?: string;
   name: string;
+  formValue?: any;
 }
 
 const InputGroup: React.FC<IProps> = ({
@@ -17,6 +18,7 @@ const InputGroup: React.FC<IProps> = ({
   required,
   type = "text",
   className,
+  formValue,
   ...rest
 }) => {
   return (
@@ -26,7 +28,9 @@ const InputGroup: React.FC<IProps> = ({
       </Label>
       <p className="dark:text-jacarta-300 text-2xs mb-3">{subTitle}</p>
       {type === "text" && <Input name={name} {...rest} />}
-      {type === "file" && <FileInput name={name} {...rest} />}
+      {type === "file" && (
+        <FileInput name={name} formValue={formValue} {...rest} />
+      )}
     </div>
   );
 };

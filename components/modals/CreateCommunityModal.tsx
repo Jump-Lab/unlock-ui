@@ -18,7 +18,8 @@ const CreateCommunityModal: React.FC<IProps> = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, dirtyFields },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -36,7 +37,16 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         required
         {...register("name")}
       />
-      <InputGroup className="mt-6" type="file" title="Cover image" {...register("file")} />
+      <InputGroup
+        className="mt-6"
+        type="file"
+        title="Cover image"
+        {...register("file")}
+        onChange={(e) => {
+          setValue("file", e.target.files[0]);
+        }}
+        formValue={watch("file")}
+      />
     </>
   );
 

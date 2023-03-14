@@ -52,7 +52,7 @@ const FilePreview: React.FC<Props> = ({ file, onClickEdit }) => {
   if (type === "video") {
     return (
       <>
-        <video className="w-full" src={URL.createObjectURL(file)}></video>
+        <video className="w-full h-full" src={URL.createObjectURL(file)}></video>
         <EditLayer onClick={onClickEdit} />
       </>
     );
