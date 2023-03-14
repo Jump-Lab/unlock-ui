@@ -10,9 +10,13 @@ interface IProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   title: string;
   name: string;
+<<<<<<< HEAD
   subTitle?: string;
   isTextarea?: boolean;
   register: UseFormRegister<FieldValues>;
+=======
+  formValue?: any;
+>>>>>>> 97f6d1e (add preview file to fileinput)
 }
 
 const InputGroup: React.FC<IProps> = ({
@@ -22,7 +26,11 @@ const InputGroup: React.FC<IProps> = ({
   required,
   type = "text",
   className,
+<<<<<<< HEAD
   isTextarea,
+=======
+  formValue,
+>>>>>>> 97f6d1e (add preview file to fileinput)
   ...rest
 }) => {
   let inputElement = <Input name={name} {...rest} />;
@@ -39,7 +47,14 @@ const InputGroup: React.FC<IProps> = ({
         {title}
       </Label>
       <p className="dark:text-jacarta-300 text-2xs mb-3">{subTitle}</p>
+<<<<<<< HEAD
       {inputElement}
+=======
+      {type === "text" && <Input name={name} {...rest} />}
+      {type === "file" && (
+        <FileInput name={name} formValue={formValue} {...rest} />
+      )}
+>>>>>>> 97f6d1e (add preview file to fileinput)
     </div>
   );
 };

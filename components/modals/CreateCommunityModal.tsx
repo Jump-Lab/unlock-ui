@@ -1,14 +1,14 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setShowCreateCommunityModal } from "redux/counterSlice";
-import Modal from "components/Modal";
-import InputGroup from "components/InputGroup";
 import Button from "components/Button";
+import InputGroup from "components/InputGroup";
+import Modal from "components/Modal";
 import { useProgram } from "providers";
-import { createCommunity } from "utils/metaplex";
 import { useUser } from "providers/UserProvider";
+import { setShowCreateCommunityModal } from "redux/counterSlice";
+import { createCommunity } from "utils/metaplex";
 
 interface IProps {}
 
@@ -21,7 +21,8 @@ const CreateCommunityModal: React.FC<IProps> = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, dirtyFields },
+    setValue,
   } = useForm();
   const { metaplex } = useProgram();
   const { user } =useUser();
@@ -56,6 +57,16 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         type="file"
         title="Cover image"
         register={register}
+      />
+      <InputGroup
+        className="mt-6"
+        type="file"
+        title="Cover image"
+        {...register("file")}
+        onChange={(e) => {
+          setValue("file", e.target.files[0]);
+        }}
+        formValue={watch("file")}
       />
     </>
   );

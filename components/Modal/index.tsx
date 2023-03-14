@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { ReactElement } from "react";
 
 interface IProps {
@@ -14,8 +15,8 @@ const Modal: React.FC<IProps> = ({ isOpen, title, body, footer, onClose }) => {
       className={isOpen ? "modal fade show block" : "modal fade"}
       id={`modal-${title}`}
     >
-      <div className="modal-dialog p-6 w-1/3">
-        <div className="modal-content">
+      <div className="modal-dialog max-w-2xl p-6 w-1/3">
+        <div className="modal-content border border-white/10">
           {/* <!-- Header --> */}
           <div className="modal-header py-4 px-6">
             <h5 className="modal-title text-lg" id={`modal-${title}-label`}>
