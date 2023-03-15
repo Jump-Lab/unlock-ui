@@ -1,17 +1,23 @@
 import React from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
-interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<FieldValues>;
 }
 
-const Input: React.FC<IProps> = ({ name, placeholder, register, ...rest }) => {
+const TextareaInput: React.FC<IProps> = ({
+  name,
+  placeholder,
+  rows = 3,
+  register,
+  ...rest
+}) => {
   return (
-    <input
+    <textarea
       {...rest}
-      type="text"
       id={`item-${name}`}
+      rows={rows}
       className="dark:bg-jacarta-700 border-jacarta-100 hover:ring-accent/10 focus:ring-accent dark:border-jacarta-600 dark:placeholder:text-jacarta-300 w-full rounded-lg py-3 px-3 hover:ring-2 dark:text-white"
       placeholder={placeholder}
       name={name}
@@ -19,4 +25,4 @@ const Input: React.FC<IProps> = ({ name, placeholder, register, ...rest }) => {
     />
   );
 };
-export default Input;
+export default TextareaInput;

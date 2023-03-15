@@ -1,7 +1,43 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import myImageLoader from "utils/loader";
 
-const Post = () => {
+import { useProgram } from "providers";
+import myImageLoader from "utils/loader";
+import { PublicKey } from "@solana/web3.js";
+import { decrypt } from "utils/lit";
+
+interface IProps {
+  address: string;
+}
+
+const Post: React.FC<IProps> = ({ address }) => {
+  const { metaplex } = useProgram();
+
+  const [nft, setNft] = useState();
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    const getMetadata = async () => {
+      const metadata = await metaplex
+        .nfts()
+        .findByMint({ mintAddress: new PublicKey(address) });
+      setNft(metadata);
+      if (metadata.json.properties) {
+        setImage(metadata.json.image);
+      }
+    };
+    getMetadata();
+  }, [address, metaplex]);
+
+  useEffect(() => {
+    if (image && nft) {
+      const decryptImage = async () => {
+        const test = await decrypt(image, nft.json.properties);
+      };
+      decryptImage()
+    }
+  }, [image, nft]);
+
   return (
     <div className="p-5 bg-jacarta-800 border border-jacarta-600 rounded-5x">
       <div className="flex items-start justify-between mb-3">

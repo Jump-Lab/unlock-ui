@@ -16,8 +16,8 @@ const initialState = {
   propartiesModalValue: false,
   trendingCategorySorText: "",
   changeAvatarModal: false,
-  showCreatePostModal: true,
-  showCreateCommunityModal: true,
+  showCreatePostModal: false,
+  showCreateCommunityModal: false,
 };
 
 export const counterSlice = createSlice({

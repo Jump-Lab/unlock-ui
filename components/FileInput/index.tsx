@@ -1,9 +1,11 @@
 import React from "react";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
-interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  register: UseFormRegister<FieldValues>;
+}
 
-const FileInput: React.FC<IProps> = ({ ...rest }) => {
-  console.log("Log ~ file: index.tsx:6 ~ rest:", rest)
+const FileInput: React.FC<IProps> = ({ register, name, ...rest }) => {
   return (
     <div className="flex items-center justify-center w-full">
       <label
@@ -33,7 +35,13 @@ const FileInput: React.FC<IProps> = ({ ...rest }) => {
             SVG, PNG, JPG or GIF (MAX. 800x400px)
           </p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" {...rest} />
+        <input
+          id="dropzone-file"
+          type="file"
+          className="hidden"
+          {...rest}
+          {...register(name)}
+        />
       </label>
     </div>
   );

@@ -6,20 +6,22 @@ import {
 
 import { SolcialPostMetadata } from "./types";
 
-const solcialCollectionAddress = new PublicKey(
-  process.env.NEXT_PUBLIC_SOLCIAL_COLLECTION_ADDRESS
-);
-
-export async function createNft(
+export async function createPost(
   nftMetadata: SolcialPostMetadata,
   metaplex: Metaplex
 ) {
   try {
-    const { description, encryptedSymmetricKey, solRpcConditions, file } =
-      nftMetadata;
-    const { uri } = await metaplex.nfts().uploadMetadata({
+    const {
+      name,
       description,
-      // symbol: 'SOLC',
+      collectionAddress,
+      encryptedSymmetricKey,
+      solRpcConditions,
+      file,
+    } = nftMetadata;
+    const { uri } = await metaplex.nfts().uploadMetadata({
+      name,
+      description,
       image: await toMetaplexFileFromBrowser(file),
       properties: {
         encryptedSymmetricKey,
@@ -27,18 +29,15 @@ export async function createNft(
       },
     });
 
-    const creationResult = await metaplex.nfts()
-    .create({
-      name: "Unlock social",
+    const creationResult = await metaplex.nfts().create({
+      name,
       sellerFeeBasisPoints: 333,
       isCollection: false,
-      // tokenStandard: TokenStandard.ProgrammableNonFungible,
-      symbol: "SOLLC",
-      collection: solcialCollectionAddress,
+      collection: new PublicKey(collectionAddress),
       uri,
     });
     return creationResult.nft.address.toString();
   } catch (e) {
-    console.log("createNft error:", e);
+    console.log("createPost error:", e);
   }
 }

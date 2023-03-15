@@ -6,6 +6,9 @@ import { setShowCreateCommunityModal } from "redux/counterSlice";
 import Modal from "components/Modal";
 import InputGroup from "components/InputGroup";
 import Button from "components/Button";
+import { useProgram } from "providers";
+import { createCommunity } from "utils/metaplex";
+import { useUser } from "providers/UserProvider";
 
 interface IProps {}
 
@@ -20,11 +23,14 @@ const CreateCommunityModal: React.FC<IProps> = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const { metaplex } = useProgram();
+  const { user } =useUser();
 
   const onSubmit = async (data) => {
+    const communityAddress = await createCommunity(data, metaplex);
     console.log(
-      "Log ~ file: CreateCommunityModal.tsx:22 ~ onSubmit ~ data:",
-      data
+      "Log ~ file: CreateCommunityModal.tsx:29 ~ onSubmit ~ communityAddress:",
+      communityAddress
     );
   };
 
@@ -33,10 +39,24 @@ const CreateCommunityModal: React.FC<IProps> = () => {
       <InputGroup
         title="Name"
         placeholder="Community Name"
+        name="name"
         required
-        {...register("name")}
+        register={register}
       />
-      <InputGroup className="mt-6" type="file" title="Cover image" {...register("file")} />
+      <InputGroup
+        title="Description"
+        placeholder="Community Description"
+        name="description"
+        isTextarea
+        register={register}
+      />
+      <InputGroup
+        name="file"
+        className="mt-6"
+        type="file"
+        title="Cover image"
+        register={register}
+      />
     </>
   );
 
@@ -48,12 +68,7 @@ const CreateCommunityModal: React.FC<IProps> = () => {
       >
         Cancel
       </Button>
-      <Button
-        isPrimary
-        className="ml-4"
-        // onClick={handleSubmit(onSubmit)}
-        type="submit"
-      >
+      <Button isPrimary className="ml-4" type="submit">
         Create
       </Button>
     </div>

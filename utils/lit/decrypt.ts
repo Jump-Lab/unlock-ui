@@ -1,4 +1,5 @@
-import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import LitJsSdk from "@lit-protocol/sdk-browser";
+import { LitArgs } from "./metadata";
 import JSZip from "jszip";
 
 import { NETWORK, solRpcConditions } from "./utils";
@@ -12,40 +13,44 @@ import { NETWORK, solRpcConditions } from "./utils";
  * @param metadata - metadata sitting on shadow-drive behind url
  * @returns {Promise<JSZip>} - decrypted .zip file
  */
-export async function decrypt(url, metadata) {
-  // build client
-  const client = new LitJsSdk.LitNodeClient({});
-  // await for connection
-  console.log("connecting to LIT network");
+export async function decrypt(
+  url,
+  { encryptedSymmetricKey, solRpcConditions }
+) {
+  console.log(1)
+  const client = new LitJsSdk.LitNodeClient({ debug: true });
   await client.connect();
-  // client signature
-  console.log("invoking signature request");
+  window.litNodeClient = client;
+  console.log(2)
+
   const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: NETWORK });
+  console.log(3)
+
   // get encryption key
-  console.log("getting key from networking");
   // Note, below we convert the encryptedSymmetricKey from a UInt8Array to a hex string.
   // This is because we obtained the encryptedSymmetricKey from "saveEncryptionKey" which returns a UInt8Array.
   // But the getEncryptionKey method expects a hex string.
-  const encryptedHexKey = LitJsSdk.uint8arrayToString(metadata.key, "base16");
+  const encryptedHexKey = client.uint8arrayToString(
+    encryptedSymmetricKey,
+    "base16"
+  );
   const retrievedSymmetricKey = await client.getEncryptionKey({
-    solRpcConditions: solRpcConditions(metadata.lit),
+    solRpcConditions,
     toDecrypt: encryptedHexKey,
     chain: NETWORK,
     authSig,
   });
-  // get encrypted zip
-  console.log("fetching encrypted zip");
-  const encryptedZip = await fetch(url + "encrypted.zip").then((response) =>
+  console.log(4)
+
+  const encryptedZip = await fetch(url).then((response) =>
     response.blob()
   );
-  // decrypt file
-  console.log("decrypting zip file");
+  console.log(5)
+
   const decrypted = await LitJsSdk.decryptZip(
     encryptedZip,
     retrievedSymmetricKey
   );
-  // convert back to zip
-  const zip = new JSZip();
-  zip.files = decrypted;
-  return zip;
+
+  return decrypted;
 }
