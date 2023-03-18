@@ -1,10 +1,13 @@
 import React from "react";
 
-import Label from "components/Label";
-import Input from "components/Input";
 import FileInput from "components/FileInput";
+<<<<<<< HEAD
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import TextAreaInput from "components/TextareaInput";
+=======
+import Input from "components/Input";
+import Label from "components/Label";
+>>>>>>> 33f31fb (use useWatch instead of watch, update responsive for modal)
 
 interface IProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {

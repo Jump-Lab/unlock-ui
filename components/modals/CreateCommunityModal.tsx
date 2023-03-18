@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "components/Button";
@@ -20,12 +20,17 @@ const CreateCommunityModal: React.FC<IProps> = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, dirtyFields },
     setValue,
+    control,
   } = useForm();
   const { metaplex } = useProgram();
   const { user } =useUser();
+
+  const fileWatchValue = useWatch({
+    control,
+    name: "file",
+  });
 
   const onSubmit = async (data) => {
     const communityAddress = await createCommunity(data, metaplex);
@@ -66,20 +71,24 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         onChange={(e) => {
           setValue("file", e.target.files[0]);
         }}
-        formValue={watch("file")}
+        formValue={fileWatchValue}
       />
     </>
   );
 
   const footer = (
-    <div className="flex flex-row">
+    <div className="flex flex-row flex-wrap items-center gap-4">
       <Button
         isSecondary
         onClick={() => dispatch(setShowCreateCommunityModal(false))}
       >
         Cancel
       </Button>
-      <Button isPrimary className="ml-4" type="submit">
+      <Button
+        isPrimary
+        // onClick={handleSubmit(onSubmit)}
+        type="submit"
+      >
         Create
       </Button>
     </div>
