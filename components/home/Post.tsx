@@ -14,6 +14,7 @@ const Post: React.FC<IProps> = ({ address }) => {
   const { metaplex } = useProgram();
 
   const [nft, setNft] = useState();
+  console.log("Log ~ file: Post.tsx:17 ~ nft:", nft)
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const Post: React.FC<IProps> = ({ address }) => {
     if (image && nft) {
       const decryptImage = async () => {
         const test = await decrypt(image, nft.json.properties);
+        console.log("Log ~ file: Post.tsx:37 ~ decryptImage ~ test:", test)
       };
       decryptImage()
     }

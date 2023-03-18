@@ -4,7 +4,7 @@ import { setShowCreatePostModal } from "redux/counterSlice";
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 
-const POST_ADDRESSES = ["3j49vEXvJp7UakXeUBHmExA1nqQ8sbjDrAfdBq5NLWu7", "5Y19eNFJLXq6J3csYfkSaQcpY6B4rGwCjBfgHxhz4hAi"]
+const POST_ADDRESSES = ["B1wXNyQiDELk6ohaeGMqNmK1nQCJFrdtckaCYFQeQihL"]
 
 const Newsfeed = () => {
   const dispatch = useDispatch();

@@ -31,10 +31,10 @@ const CreatePostModal: React.FC<IProps> = () => {
   const onSubmit = async (data) => {
     try {
       const litArgs = defaultLitArgs(TEST_MINT);
-      const { key, file: encryptedZipFile } = await encrypt(data.file, litArgs);
+      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(data.file, litArgs);
       const solConditions = solRpcConditions(litArgs);
       const encryptionData = {
-        encryptedSymmetricKey: key,
+        encryptedSymmetricKey,
         solRpcConditions: solConditions,
       };
 
