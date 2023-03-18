@@ -2,10 +2,12 @@ import classNames from "classnames";
 import FilePreview from "components/InputGroup/FilePreview";
 import Image from "next/image";
 import React, { useRef } from "react";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 import myImageLoader from "utils/loader";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   formValue?: any;
+  register: UseFormRegister<FieldValues>;
 }
 
 const EditLayer: React.FC<{
@@ -30,8 +32,14 @@ const EditLayer: React.FC<{
   );
 };
 
-const FileInput: React.FC<IProps> = ({ formValue, ...rest }) => {
-  console.log("Log ~ file: index.tsx:6 ~ rest:", rest);
+const FileInput: React.FC<IProps> = ({
+  formValue,
+  register,
+  name,
+  onChange,
+  ...rest
+}) => {
+  console.log("rest");
   const inputRef = useRef<HTMLInputElement>(null);
   const type = formValue?.type.split("/")[0];
 
@@ -72,11 +80,16 @@ const FileInput: React.FC<IProps> = ({ formValue, ...rest }) => {
           </p>
         </div>
         <input
+          {...rest}
+          name={name}
           ref={inputRef}
           id="dropzone-file"
           type="file"
           className="hidden"
-          {...rest}
+          onChangeCapture={(e) => {
+            console.log("run input", e.target.files);
+          }}
+          {...register(name)}
         />
       </label>
 

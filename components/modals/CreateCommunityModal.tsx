@@ -8,7 +8,6 @@ import Modal from "components/Modal";
 import { useProgram } from "providers";
 import { useUser } from "providers/UserProvider";
 import { setShowCreateCommunityModal } from "redux/counterSlice";
-import { createCommunity } from "utils/metaplex";
 
 interface IProps {}
 
@@ -25,19 +24,19 @@ const CreateCommunityModal: React.FC<IProps> = () => {
     control,
   } = useForm();
   const { metaplex } = useProgram();
-  const { user } =useUser();
+  const { user } = useUser();
 
   const fileWatchValue = useWatch({
     control,
     name: "file",
   });
-
   const onSubmit = async (data) => {
-    const communityAddress = await createCommunity(data, metaplex);
-    console.log(
-      "Log ~ file: CreateCommunityModal.tsx:29 ~ onSubmit ~ communityAddress:",
-      communityAddress
-    );
+    // const communityAddress = await createCommunity(data, metaplex);
+    // console.log(
+    //   "Log ~ file: CreateCommunityModal.tsx:29 ~ onSubmit ~ communityAddress:",
+    //   communityAddress
+    // );
+    console.log("submit", data);
   };
 
   const body = (
@@ -56,22 +55,21 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         isTextarea
         register={register}
       />
-      <InputGroup
+      {/* <InputGroup
         name="file"
         className="mt-6"
         type="file"
         title="Cover image"
         register={register}
-      />
+      /> */}
       <InputGroup
         className="mt-6"
         type="file"
         title="Cover image"
-        {...register("file")}
-        onChange={(e) => {
-          setValue("file", e.target.files[0]);
-        }}
+        register={register}
         formValue={fileWatchValue}
+        name="file"
+        onChange={() => console.log("run input")}
       />
     </>
   );

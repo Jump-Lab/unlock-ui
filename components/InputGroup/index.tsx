@@ -1,25 +1,20 @@
 import React from "react";
 
 import FileInput from "components/FileInput";
-<<<<<<< HEAD
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import TextAreaInput from "components/TextareaInput";
-=======
 import Input from "components/Input";
 import Label from "components/Label";
->>>>>>> 33f31fb (use useWatch instead of watch, update responsive for modal)
+import TextAreaInput from "components/TextareaInput";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface IProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   title: string;
   name: string;
-<<<<<<< HEAD
   subTitle?: string;
   isTextarea?: boolean;
   register: UseFormRegister<FieldValues>;
-=======
   formValue?: any;
->>>>>>> 97f6d1e (add preview file to fileinput)
+  onInputChange?: (e: any) => void;
 }
 
 const InputGroup: React.FC<IProps> = ({
@@ -29,19 +24,25 @@ const InputGroup: React.FC<IProps> = ({
   required,
   type = "text",
   className,
-<<<<<<< HEAD
   isTextarea,
-=======
   formValue,
->>>>>>> 97f6d1e (add preview file to fileinput)
+  register,
+  onChange,
   ...rest
 }) => {
-  let inputElement = <Input name={name} {...rest} />;
+  let inputElement = <Input name={name} {...rest} register={register} />;
   if (type === "file") {
-    inputElement = <FileInput name={name} {...rest} />;
+    inputElement = (
+      <FileInput
+        name={name}
+        {...rest}
+        register={register}
+        onChange={onChange}
+      />
+    );
   }
   if (isTextarea) {
-    inputElement = <TextAreaInput name={name} {...rest} />;
+    inputElement = <TextAreaInput name={name} {...rest} register={register} />;
   }
 
   return (
@@ -50,14 +51,7 @@ const InputGroup: React.FC<IProps> = ({
         {title}
       </Label>
       <p className="dark:text-jacarta-300 text-2xs mb-3">{subTitle}</p>
-<<<<<<< HEAD
       {inputElement}
-=======
-      {type === "text" && <Input name={name} {...rest} />}
-      {type === "file" && (
-        <FileInput name={name} formValue={formValue} {...rest} />
-      )}
->>>>>>> 97f6d1e (add preview file to fileinput)
     </div>
   );
 };
