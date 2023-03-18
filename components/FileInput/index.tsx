@@ -1,16 +1,60 @@
-import React from "react";
+import classNames from "classnames";
+import FilePreview from "components/InputGroup/FilePreview";
+import Image from "next/image";
+import React, { useRef } from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
+import myImageLoader from "utils/loader";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  formValue?: any;
   register: UseFormRegister<FieldValues>;
 }
 
-const FileInput: React.FC<IProps> = ({ register, name, ...rest }) => {
+const EditLayer: React.FC<{
+  onClick: () => void;
+}> = ({ onClick }) => {
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="absolute top-0 right-0 h-full w-full bg-black/60 z-10 flex justify-center items-center group-hover:opacity-100 opacity-0 transition-opacity duration-200">
+      <button
+        onClick={onClick}
+        className="flex items-center px-4 py-2 bg-accent-dark text-white rounded-7x gap-x-2"
+      >
+        <Image
+          src="/images/edit.svg"
+          width={20}
+          height={20}
+          alt="Close"
+          loader={myImageLoader}
+        />
+        <span className="text-base leading-6 font-bold font-body">Edit</span>
+      </button>
+    </div>
+  );
+};
+
+const FileInput: React.FC<IProps> = ({
+  formValue,
+  register,
+  name,
+  onChange,
+  ...rest
+}) => {
+  console.log("rest");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const type = formValue?.type.split("/")[0];
+
+  const openInput = () => {
+    inputRef.current?.click();
+  };
+
+  return (
+    <div className="flex items-center justify-center w-full relative rounded-lg overflow-hidden group">
       <label
         htmlFor="dropzone-file"
-        className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        className={classNames(
+          "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
+          !!type && "opacity-0"
+        )}
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
           <svg
@@ -36,13 +80,36 @@ const FileInput: React.FC<IProps> = ({ register, name, ...rest }) => {
           </p>
         </div>
         <input
+          {...rest}
+          name={name}
+          ref={inputRef}
           id="dropzone-file"
           type="file"
           className="hidden"
-          {...rest}
+          onChangeCapture={(e) => {
+            console.log("run input", e.target.files);
+          }}
           {...register(name)}
         />
       </label>
+
+      {type && (
+        <>
+          {/* <Image
+            fill
+            className="object-cover"
+            src={URL.createObjectURL(formValue)}
+            loader={myImageLoader}
+            alt="Picture of the author"
+          />
+          <EditLayer
+            onClick={() => {
+              openInput();
+            }}
+          /> */}
+          <FilePreview file={formValue} onClickEdit={openInput} />
+        </>
+      )}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<FieldValues>;
 }
 
 const Input: React.FC<IProps> = ({ name, placeholder, register, ...rest }) => {

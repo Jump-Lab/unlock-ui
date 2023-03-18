@@ -1,20 +1,33 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setShowCreatePostModal } from "redux/counterSlice";
-import Modal from "components/Modal";
-import InputGroup from "components/InputGroup";
 import Button from "components/Button";
+import InputGroup from "components/InputGroup";
+import Modal from "components/Modal";
 import { useProgram } from "providers";
-import { createCommunity, SolcialPostMetadata } from "utils/metaplex";
 import { useUser } from "providers/UserProvider";
-import { createPost } from "utils/metaplex/createPost";
+import { setShowCreatePostModal } from "redux/counterSlice";
 import { defaultLitArgs, encrypt, solRpcConditions } from "utils/lit";
+import { createPost } from "utils/metaplex/createPost";
+
+const FILE_TYPES = [
+  "JPG",
+  "JPEG",
+  "PNG",
+  "GIF",
+  "SVG",
+  "MP4",
+  "WEBM",
+  "MP3",
+  "WAV",
+  "OGG",
+  "GLB",
+  "GLTF",
+];
+const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 
 interface IProps {}
-
-const TEST_MINT = `Dz6bybA6jgjKBVnVvS1P4UsiJdVM4ZurEgkpu5u4ESTX`;
 
 const CreatePostModal: React.FC<IProps> = () => {
   const dispatch = useDispatch();
@@ -28,10 +41,20 @@ const CreatePostModal: React.FC<IProps> = () => {
   const { metaplex } = useProgram();
   const { user } = useUser();
 
+  const onChangeFile = (file) => {
+    console.log(
+      "Log ~ file: CreatePostModal.tsx:43 ~ onChangeFile ~ file",
+      file
+    );
+  };
+
   const onSubmit = async (data) => {
     try {
       const litArgs = defaultLitArgs(TEST_MINT);
-      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(data.file, litArgs);
+      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(
+        data.file,
+        litArgs
+      );
       const solConditions = solRpcConditions(litArgs);
       const encryptionData = {
         encryptedSymmetricKey,
@@ -43,8 +66,8 @@ const CreatePostModal: React.FC<IProps> = () => {
         ...encryptionData,
         file: encryptedZipFile,
         // TODO: Input for getting collection address
-        collectionAddress: "7o7Ae9rcnZK67MGxwnzWdnwiCe48ZpK2BCTACvvVvMuQ"
-      }
+        collectionAddress: "7o7Ae9rcnZK67MGxwnzWdnwiCe48ZpK2BCTACvvVvMuQ",
+      };
 
       const postAddress = await createPost(postData, metaplex);
       console.log(

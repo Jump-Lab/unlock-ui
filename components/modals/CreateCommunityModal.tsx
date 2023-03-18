@@ -1,14 +1,13 @@
 import React from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 
-import { setShowCreateCommunityModal } from "redux/counterSlice";
-import Modal from "components/Modal";
-import InputGroup from "components/InputGroup";
 import Button from "components/Button";
+import InputGroup from "components/InputGroup";
+import Modal from "components/Modal";
 import { useProgram } from "providers";
-import { createCommunity } from "utils/metaplex";
 import { useUser } from "providers/UserProvider";
+import { setShowCreateCommunityModal } from "redux/counterSlice";
 
 interface IProps {}
 
@@ -20,18 +19,24 @@ const CreateCommunityModal: React.FC<IProps> = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
+    formState: { errors, dirtyFields },
+    setValue,
+    control,
   } = useForm();
   const { metaplex } = useProgram();
-  const { user } =useUser();
+  const { user } = useUser();
 
+  const fileWatchValue = useWatch({
+    control,
+    name: "file",
+  });
   const onSubmit = async (data) => {
-    const communityAddress = await createCommunity(data, metaplex);
-    console.log(
-      "Log ~ file: CreateCommunityModal.tsx:29 ~ onSubmit ~ communityAddress:",
-      communityAddress
-    );
+    // const communityAddress = await createCommunity(data, metaplex);
+    // console.log(
+    //   "Log ~ file: CreateCommunityModal.tsx:29 ~ onSubmit ~ communityAddress:",
+    //   communityAddress
+    // );
+    console.log("submit", data);
   };
 
   const body = (
@@ -50,25 +55,38 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         isTextarea
         register={register}
       />
-      <InputGroup
+      {/* <InputGroup
         name="file"
         className="mt-6"
         type="file"
         title="Cover image"
         register={register}
+      /> */}
+      <InputGroup
+        className="mt-6"
+        type="file"
+        title="Cover image"
+        register={register}
+        formValue={fileWatchValue}
+        name="file"
+        onChange={() => console.log("run input")}
       />
     </>
   );
 
   const footer = (
-    <div className="flex flex-row">
+    <div className="flex flex-row flex-wrap items-center gap-4">
       <Button
         isSecondary
         onClick={() => dispatch(setShowCreateCommunityModal(false))}
       >
         Cancel
       </Button>
-      <Button isPrimary className="ml-4" type="submit">
+      <Button
+        isPrimary
+        // onClick={handleSubmit(onSubmit)}
+        type="submit"
+      >
         Create
       </Button>
     </div>

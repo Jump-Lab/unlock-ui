@@ -4,13 +4,13 @@ import { setShowCreatePostModal } from "redux/counterSlice";
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 
-const POST_ADDRESSES = ["B1wXNyQiDELk6ohaeGMqNmK1nQCJFrdtckaCYFQeQihL"]
+const POST_ADDRESSES = []
 
 const Newsfeed = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 max-w-3xl">
       <div onClick={() => dispatch(setShowCreatePostModal(true))}>
         <CreatePost />
       </div>
