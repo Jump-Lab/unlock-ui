@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const Modal: React.FC<IProps> = ({ isOpen, title, body, footer, onClose }) => {
+  if (!isOpen) return null;
   return (
     <div
       className={isOpen ? "modal fade show block" : "modal fade"}

@@ -36,8 +36,8 @@ const InputGroup: React.FC<IProps> = ({
       <FileInput
         name={name}
         {...rest}
+        formValue={formValue}
         register={register}
-        onChange={onChange}
       />
     );
   }

@@ -1,13 +1,17 @@
+import { useSelector } from "react-redux";
 import Footer from "./footer";
-import Wallet_modal from "./modals/wallet_modal";
+import Header from "./header";
 import BidsModal from "./modals/bidsModal";
 import BuyModal from "./modals/buyModal";
-import Header from "./header";
 import ChangeAvatarModal from "./modals/ChangeAvatarModal";
-import CreatePostModal from "./modals/CreatePostModal";
 import CreateCommunityModal from "./modals/CreateCommunityModal";
+import CreatePostModal from "./modals/CreatePostModal";
+import Wallet_modal from "./modals/wallet_modal";
 
 export default function Layout({ children }) {
+  const { showCreatePostModal, showCreateCommunityModal } = useSelector(
+    (state: any) => state.counter
+  );
   return (
     <>
       <Header />
@@ -15,8 +19,8 @@ export default function Layout({ children }) {
       <BidsModal />
       <BuyModal />
       <ChangeAvatarModal />
-      <CreatePostModal />
-      <CreateCommunityModal />
+      {showCreatePostModal && <CreatePostModal />}
+      {showCreateCommunityModal && <CreateCommunityModal />}
       <main>{children}</main>
       <Footer />
     </>

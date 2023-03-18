@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "components/Button";
@@ -8,8 +8,6 @@ import Modal from "components/Modal";
 import { useProgram } from "providers";
 import { useUser } from "providers/UserProvider";
 import { setShowCreatePostModal } from "redux/counterSlice";
-import { defaultLitArgs, encrypt, solRpcConditions } from "utils/lit";
-import { createPost } from "utils/metaplex/createPost";
 
 const FILE_TYPES = [
   "JPG",
@@ -37,10 +35,10 @@ const CreatePostModal: React.FC<IProps> = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    control,
   } = useForm();
   const { metaplex } = useProgram();
   const { user } = useUser();
-
   const onChangeFile = (file) => {
     console.log(
       "Log ~ file: CreatePostModal.tsx:43 ~ onChangeFile ~ file",
@@ -49,35 +47,14 @@ const CreatePostModal: React.FC<IProps> = () => {
   };
 
   const onSubmit = async (data) => {
-    try {
-      const litArgs = defaultLitArgs(TEST_MINT);
-      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(
-        data.file,
-        litArgs
-      );
-      const solConditions = solRpcConditions(litArgs);
-      const encryptionData = {
-        encryptedSymmetricKey,
-        solRpcConditions: solConditions,
-      };
-
-      const postData = {
-        ...data,
-        ...encryptionData,
-        file: encryptedZipFile,
-        // TODO: Input for getting collection address
-        collectionAddress: "7o7Ae9rcnZK67MGxwnzWdnwiCe48ZpK2BCTACvvVvMuQ",
-      };
-
-      const postAddress = await createPost(postData, metaplex);
-      console.log(
-        "Log ~ file: CreatePostModal.tsx:29 ~ onSubmit ~ communityAddress:",
-        postAddress
-      );
-    } catch (e) {
-      console.log(e);
-    }
+    console.log("submit", data);
+    return;
   };
+
+  const imageFileValue = useWatch({
+    control,
+    name: "file",
+  });
 
   const body = (
     <>
@@ -101,6 +78,7 @@ const CreatePostModal: React.FC<IProps> = () => {
         type="file"
         title="Asset"
         register={register}
+        formValue={imageFileValue?.[0]}
       />
     </>
   );

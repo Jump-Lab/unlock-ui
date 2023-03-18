@@ -22,14 +22,16 @@ const CreateCommunityModal: React.FC<IProps> = () => {
     formState: { errors, dirtyFields },
     setValue,
     control,
+    watch,
   } = useForm();
   const { metaplex } = useProgram();
   const { user } = useUser();
 
-  const fileWatchValue = useWatch({
+  const imageFileValue = useWatch({
     control,
     name: "file",
   });
+
   const onSubmit = async (data) => {
     // const communityAddress = await createCommunity(data, metaplex);
     // console.log(
@@ -63,13 +65,12 @@ const CreateCommunityModal: React.FC<IProps> = () => {
         register={register}
       /> */}
       <InputGroup
+        name="file"
         className="mt-6"
         type="file"
-        title="Cover image"
+        title="Asset"
         register={register}
-        formValue={fileWatchValue}
-        name="file"
-        onChange={() => console.log("run input")}
+        formValue={imageFileValue?.[0]}
       />
     </>
   );

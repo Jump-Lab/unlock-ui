@@ -39,9 +39,10 @@ const FileInput: React.FC<IProps> = ({
   onChange,
   ...rest
 }) => {
-  console.log("rest");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>();
   const type = formValue?.type.split("/")[0];
+
+  const { ref, ...registerRest } = register(name);
 
   const openInput = () => {
     inputRef.current?.click();
@@ -80,16 +81,18 @@ const FileInput: React.FC<IProps> = ({
           </p>
         </div>
         <input
-          {...rest}
           name={name}
-          ref={inputRef}
           id="dropzone-file"
           type="file"
           className="hidden"
-          onChangeCapture={(e) => {
-            console.log("run input", e.target.files);
+          // onChangeCapture={(e) => {
+          //   console.log("run input", e.target.files);
+          // }}
+          ref={(e) => {
+            ref(e);
+            inputRef.current = e;
           }}
-          {...register(name)}
+          {...registerRest}
         />
       </label>
 
