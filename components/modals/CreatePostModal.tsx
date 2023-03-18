@@ -31,24 +31,27 @@ const CreatePostModal: React.FC<IProps> = () => {
   const onSubmit = async (data) => {
     try {
       const litArgs = defaultLitArgs(TEST_MINT);
-      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(data.file, litArgs);
+      const { encryptedSymmetricKey, file: encryptedZipFile } = await encrypt(
+        data.file[0],
+        litArgs
+      );
       const solConditions = solRpcConditions(litArgs);
       const encryptionData = {
         encryptedSymmetricKey,
         solRpcConditions: solConditions,
       };
 
-      const postData = {
+      const postData: SolcialPostMetadata = {
         ...data,
         ...encryptionData,
         file: encryptedZipFile,
         // TODO: Input for getting collection address
-        collectionAddress: "7o7Ae9rcnZK67MGxwnzWdnwiCe48ZpK2BCTACvvVvMuQ"
-      }
+        collectionAddress: "7o7Ae9rcnZK67MGxwnzWdnwiCe48ZpK2BCTACvvVvMuQ",
+      };
 
       const postAddress = await createPost(postData, metaplex);
       console.log(
-        "Log ~ file: CreatePostModal.tsx:29 ~ onSubmit ~ communityAddress:",
+        "Log ~ file: CreatePostModal.tsx:51 ~ onSubmit ~ postAddress:",
         postAddress
       );
     } catch (e) {

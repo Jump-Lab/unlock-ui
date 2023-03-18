@@ -33,6 +33,7 @@ const Post: React.FC<IProps> = ({ address }) => {
   useEffect(() => {
     if (image && nft) {
       const decryptImage = async () => {
+        //@ts-ignore
         const test = await decrypt(image, nft.json.properties);
         console.log("Log ~ file: Post.tsx:37 ~ decryptImage ~ test:", test)
       };

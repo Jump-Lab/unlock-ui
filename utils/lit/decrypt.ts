@@ -1,12 +1,9 @@
 import LitJsSdk from "@lit-protocol/sdk-browser";
-import JSZip from "jszip";
 
-import { LitArgs } from "./metadata";
-
-import { NETWORK, solRpcConditions } from "./utils";
+import { NETWORK } from "./utils";
 
 export async function decrypt(
-  url,
+  url: string,
   { encryptedSymmetricKey, solRpcConditions }
 ) {
   const client = new LitJsSdk.LitNodeClient({ debug: true });
@@ -16,7 +13,6 @@ export async function decrypt(
 
   const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: NETWORK });
 
-  console.log("Log ~ file: decrypt.ts:12 ~ encryptedSymmetricKey:", encryptedSymmetricKey)
   const symmetricKey = await client.getEncryptionKey({
     solRpcConditions,
     toDecrypt: encryptedSymmetricKey,
@@ -24,14 +20,11 @@ export async function decrypt(
     authSig,
   });
 
-  const encryptedZip = await fetch(url).then((response) =>
-    response.blob()
-  );
+  const encryptedFile = await fetch(url).then((response) => {
+    return response.blob();
+  });
 
-  const decrypted = await LitJsSdk.decryptZip(
-    encryptedZip,
-    symmetricKey
-  );
+  const decrypted = await LitJsSdk.decryptFile(encryptedFile, symmetricKey);
 
   return decrypted;
 }

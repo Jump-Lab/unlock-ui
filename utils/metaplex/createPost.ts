@@ -19,6 +19,7 @@ export async function createPost(
       solRpcConditions,
       file,
     } = nftMetadata;
+    console.log("Log ~ file: createPost.ts:22 ~ file:", file);
     const { uri } = await metaplex.nfts().uploadMetadata({
       name,
       description,

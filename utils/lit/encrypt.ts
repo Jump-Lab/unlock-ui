@@ -2,16 +2,19 @@ import LitJsSdk from "@lit-protocol/sdk-browser";
 import { LitArgs } from "./metadata";
 import { NETWORK, solRpcConditions } from "./utils";
 
-export async function encrypt(files: File[], litArgs: LitArgs) {
+export async function encrypt(
+  toEncryptFile: File,
+  litArgs: LitArgs
+): Promise<{ encryptedSymmetricKey: string; file: File }> {
   const client = new LitJsSdk.LitNodeClient({ debug: true });
   await client.connect();
   //@ts-ignore
   window.litNodeClient = client;
   const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: NETWORK });
 
-  const { encryptedZip, symmetricKey } = await LitJsSdk.zipAndEncryptFiles(
-    files
-  );
+  const { encryptedFile, symmetricKey } = await LitJsSdk.encryptFile({
+    file: toEncryptFile,
+  });
 
   const encryptedSymmetricKey = await client.saveEncryptionKey({
     solRpcConditions: solRpcConditions(litArgs),
@@ -21,7 +24,7 @@ export async function encrypt(files: File[], litArgs: LitArgs) {
     permanent: 1,
   });
 
-  const file = new File([encryptedZip], "encrypted.zip");
+  const file = new File([encryptedFile], toEncryptFile.name);
   return {
     encryptedSymmetricKey: LitJsSdk.uint8arrayToString(
       encryptedSymmetricKey,
